@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
+
+//Lottie
+import lottie from 'lottie-web'
 //ScrollMagic
 import * as ScrollMagic from "scrollmagic";
 // //Gsap
@@ -11,24 +14,46 @@ import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
 gsap.registerPlugin(CSSPlugin)
 
 const Quienes= ()=>{
-
-    const data = useStaticQuery(graphql `
-    query {
-      icono: file(relativePath: { eq: "logo.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 300) {
-            ...GatsbyImageSharpFluid
-          }
+  const data = useStaticQuery(graphql `
+  query {
+    icono: file(relativePath: { eq: "logo.png" }) {
+      childImageSharp {
+        fluid(maxWidth: 300) {
+          ...GatsbyImageSharpFluid
         }
       }
     }
-    `)
+  }
+  `)
+
+        //Ref
+        const preloaderRef = React.createRef<HTMLDivElement>()
     useEffect(()=>{
       ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax);
-      const controller1 = {
-        controller :  new ScrollMagic.Controller(),
-        timelineOne: gsap.timeline()   
-      }
+      const speed = 1
+      var second = (document.getElementById("quienes1"))
+      const anim = lottie.loadAnimation({
+        renderer: 'svg',
+        container: preloaderRef.current,
+        animationData: require("../animations/preloader.json"),
+        autoplay: false,
+        loop: false,
+    })
+    const controller1 =  new ScrollMagic.Controller()
+    const tl = new TimelineMax();
+
+    tl.to({frame: 0}, 1 ,{
+      frame: anim.totalFrames-1,
+      onUpdate: (e)=>{
+          anim.goToAndStop((Math.round(tl.progress() * 300 * speed)), true)
+      },
+      ease: Linear.easeNone,
+      })
+      new ScrollMagic.Scene({
+        triggerElement: ".oculto1",
+        duration :200,
+        offset: -50
+    }).setTween(tl).setPin(preloaderRef).addTo(controller1)
     },[])
     const circles = ()=>{
       var tamano = "1020"
@@ -40,14 +65,13 @@ const Quienes= ()=>{
       </>
       )
     }
-    // var svgR = document.getElementById("svgR"),
-		// pathR = document.getElementById("pathR"),
-    // loaderR = document.getElementById("loaderR");
+ 
     
     return(
         <div id="quienes" className="quienes">
             <div className="container">
               <div className="quienes1">
+              <div className='oculto1'/>
                 <div className="description">
                   Loremipsumdolorsitamet,consectetueradipiscingelit.Aeneancommodo
                   ligulaegetdolor.Aeneanmassa.Cumsociisnatoquepenatibusetmagnisdis

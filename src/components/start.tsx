@@ -4,7 +4,7 @@ import Img from "gatsby-image"
 // import { Link } from "gatsby"
 import {Link} from "react-scroll"
 import lottie from "lottie-web"
-import animation from "../animations/preloader.json"
+
 
 
 
@@ -30,7 +30,7 @@ const Start = ()=>{
         renderer: "svg",
         loop: false,
         autoplay: true,
-        animationData: animation,
+        animationData: require("../animations/preloader.json"),
       });
       anim.addEventListener("complete", function () {
            var elmnt = document.getElementById("quienes");
