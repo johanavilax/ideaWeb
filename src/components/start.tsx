@@ -4,7 +4,7 @@ import Img from "gatsby-image"
 // import { Link } from "gatsby"
 import {Link} from "react-scroll"
 import lottie from "lottie-web"
-import animation from "../animations/idealogo.json"
+import animation from "../animations/preloader.json"
 
 
 
@@ -28,19 +28,13 @@ const Start = ()=>{
       const anim = lottie.loadAnimation({
         container: preloaderRef.current,
         renderer: "svg",
-        loop: true,
-        autoplay: false,
+        loop: false,
+        autoplay: true,
         animationData: animation,
       });
-      anim.setSpeed(0.5)
-      anim.setDirection(-1)
-      anim.play()
-      anim.addEventListener("enterFrame", function (animation) {
-        if (animation.currentTime < ( 1)) {
-           anim.pause()
+      anim.addEventListener("complete", function () {
            var elmnt = document.getElementById("quienes");
            elmnt.scrollIntoView({behavior: "smooth"});
-        }
         })
     }, []);
   

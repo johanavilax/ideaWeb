@@ -1,16 +1,17 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
-// //ScrollMagic
-// import * as ScrollMagic from "scrollmagic";
+//ScrollMagic
+import * as ScrollMagic from "scrollmagic";
 // //Gsap
-// import {CSSPlugin, Power4, Linear} from 'gsap/all'
-// import gsap , { TimelineMax, TweenMax, TweenLite } from "gsap";
+import {CSSPlugin, Power4, Linear} from 'gsap/all'
+import gsap , { TimelineMax, TweenMax, TweenLite } from "gsap";
 
-// import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
-// gsap.registerPlugin(CSSPlugin)
-// ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax);
+import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
+gsap.registerPlugin(CSSPlugin)
+
 const Quienes= ()=>{
+
     const data = useStaticQuery(graphql `
     query {
       icono: file(relativePath: { eq: "logo.png" }) {
@@ -22,6 +23,13 @@ const Quienes= ()=>{
       }
     }
     `)
+    useEffect(()=>{
+      ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax);
+      const controller1 = {
+        controller :  new ScrollMagic.Controller(),
+        timelineOne: gsap.timeline()   
+      }
+    },[])
     const circles = ()=>{
       var tamano = "1020"
       return (

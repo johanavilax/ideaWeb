@@ -19,9 +19,9 @@ const Header = () => {
     <header >
     <div className="container">
           <div className="innerHeader">
-            <div className="logo">
+            {/* <div className="logo">
               <Link smooth={true} to="start"><Img fluid={data.placeholderImage.childImageSharp.fluid} /></Link>
-            </div>
+            </div> */}
             <div className="navigation">
               <nav>
                 <Link smooth={true} to="quienes" >Quiénes somos</Link>

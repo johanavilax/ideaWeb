@@ -34,4 +34,5 @@ module.exports = {
     // `gatsby-plugin-offline`,
   ],
   pathPrefix : "/ideaWeb",
+  
 }
