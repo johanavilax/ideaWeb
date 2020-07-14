@@ -1,7 +1,7 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
-
+import {FullpageSection } from '@ap.cx/react-fullpage'
 const Servicios= ()=>{
     const data = useStaticQuery(graphql `
     query {
@@ -26,9 +26,10 @@ const Servicios= ()=>{
       )
     }
     return(
-        <div id="servicios" className="servicios">
+        <div  className="servicios">
             <div className="container">
-              <div className="servicio1">
+              <FullpageSection>
+              <div id="servicios" className="servicio1 itemSlider">
                 <div className="card">
                   <div className="title">
                     <h1>
@@ -55,7 +56,9 @@ const Servicios= ()=>{
                   </div>
                 </div>
               </div>
-              <div className="servicio2">
+              </FullpageSection>
+              <FullpageSection>
+              <div className="servicio2 itemSlider">
                 <div className="izq">
                   <div className="arriba">
                       {circle()}
@@ -101,6 +104,7 @@ const Servicios= ()=>{
                   </div>
                 </div>
               </div>
+              </FullpageSection>
             </div>
         </div>
 

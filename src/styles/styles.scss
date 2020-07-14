@@ -15,8 +15,16 @@ html,body{
     font-family: $font;
     padding: 0;
     margin: 0;
-    overflow-x: hidden;
     
+}
+
+.itemSlider {
+    color: #fff;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 2;
 }
 
 .container{
@@ -40,12 +48,14 @@ html,body{
 //start 
 .start {
     background-color: $white;
-    position: relative;
+    position: absolute;
+    top:0;
+    left:0;
     display: flex;
     height: 100vh;
     width: 100vw;
     overflow: hidden;
-    z-index: 30;
+    z-index: 30 !important;
     .mainImage{
         position: absolute;
         left: 50%;
@@ -55,21 +65,7 @@ html,body{
         transform: translate(-50%, -50%);
         -webkit-transform: translate(-50%, -50%);
     }
-    .circles{
-        position: absolute;
-        left: 0%;
-        top: 90%;
-        margin: 0 auto;
-        transform: translate(-50%, -50%);
-        -webkit-transform: translate(-50%, -50%);
-        stroke: $darkBlue;
-        stroke-width: 25;
-        fill: $white;
-        svg{
-            width: 440px;
-            height: 440px;
-        }
-    }
+
     .scrollDown{
         font-weight: 700;
         font-size: .875rem;
@@ -134,20 +130,46 @@ header{
 
 }
 
-//Quienes
-.quienes{
+.circles{
+    position: fixed;
+    left: 5%;
+    top: 90%;
+    margin: 0 auto;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    stroke: $darkBlue;
+    stroke-width: 25;
+    fill: $white;
+    svg{
+        width: 440px;
+        height: 440px;
+        background:inherit;
+        circle{
+            background:inherit;
+        }
+    }
+    z-index: 80;
+    h1{
+        left: 50%;
+        top: 40%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+    }
+}
+$space:25%;
+#inicio{
     position: relative;
-    background-color: $white;
-    height: 400vh;
+    height: 100vh;
     font-size: 30px;
-    display: flex;
-    .quienes1{
+    z-index:80;
+    .inicio{
         position: relative;
         height: 100vh;
         .oculto1{
             position: absolute;
             left: 0%;
-            top: 20%;
+            top: 50%;
             height: 1vh;
             width: 100%;
             // border: 1px solid black;
@@ -194,182 +216,185 @@ header{
             }
         }
     }
-    .quienes2{
-        // border: blue 2px solid;
+}
+
+.quienes2{
+    border: blue 2px solid;
+    position: relative;
+    height: 100vh;
+    .quienesSomos{
+        width: 1048px;
+        height: 578px;
+        border-radius: 2%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: 0 auto;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        -webkit-box-shadow: 5px 5px 19px -1px rgba(0,0,0,0.28);
+        -moz-box-shadow: 5px 5px 19px -1px rgba(0,0,0,0.28);
+        box-shadow: 5px 5px 19px -1px rgba(0,0,0,0.28);
+        .title{
+            svg{
+                margin: 0 auto;
+                width: 40px;
+                height: 40px;
+                stroke: $lightBlue;
+                stroke-width: 1;
+                fill: $lightBlue;
+                margin-right: 5%;
+            }
+
+            h1{
+                text-align: center;
+                color: $lightBlue;
+            }
+            height: 20%;
+            border: white 1px solid;
+        }
+        .separador{
+            display: flex;
+            height: 80%;
+            position: relative;
+            .imagen{
+                width: 35%;
+                // border: black solid 2px;
+                position: relative;
+                .image{
+                    // border: black solid 2px;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    margin: 0 auto;
+                    transform: translate(-50%, -50%);
+                    -webkit-transform: translate(-50%, -50%);
+                    width: 70%;
+                    height: 70%;
+                }
+            }
+            .text{
+                width: 65%;
+                padding: 5%;
+                margin: 5px;
+                text-align: justify;
+                height: 100%;
+                word-wrap:break-word;
+            }
+        }
+
+    }
+}
+
+.misionVision{
+    position: relative;
+    height: 100vh;
+    display: flex;
+    .arriba{
         position: relative;
-        height: 100vh;
-        .quienesSomos{
-            width: 1048px;
-            height: 578px;
-            border-radius: 2%;
+        height: 50%;
+        border: white 1px solid;
+    }
+    .abajo{
+        position: relative;
+        height: 50%; 
+    }
+    .izq{
+        width: 50%;
+        svg{
             position: absolute;
             left: 50%;
             top: 50%;
             margin: 0 auto;
             transform: translate(-50%, -50%);
             -webkit-transform: translate(-50%, -50%);
-            -webkit-box-shadow: 5px 5px 19px -1px rgba(0,0,0,0.28);
-            -moz-box-shadow: 5px 5px 19px -1px rgba(0,0,0,0.28);
-            box-shadow: 5px 5px 19px -1px rgba(0,0,0,0.28);
-            .title{
-                svg{
-                    margin: 0 auto;
-                    width: 40px;
-                    height: 40px;
-                    stroke: $lightBlue;
-                    stroke-width: 1;
-                    fill: $lightBlue;
-                    margin-right: 5%;
-                }
-
-                h1{
-                    text-align: center;
-                    color: $lightBlue;
-                }
-                height: 20%;
-                border: white 1px solid;
-            }
-            .separador{
-                display: flex;
-                height: 80%;
-                position: relative;
-                .imagen{
-                    width: 35%;
-                    // border: black solid 2px;
-                    position: relative;
-                    .image{
-                        // border: black solid 2px;
-                        position: absolute;
-                        left: 50%;
-                        top: 50%;
-                        margin: 0 auto;
-                        transform: translate(-50%, -50%);
-                        -webkit-transform: translate(-50%, -50%);
-                        width: 70%;
-                        height: 70%;
-                    }
-                }
-                .text{
-                    width: 65%;
-                    padding: 5%;
-                    margin: 5px;
-                    text-align: justify;
-                    height: 100%;
-                    word-wrap:break-word;
-                }
-            }
-
+            fill:$lightBlue;
         }
     }
-    .misionVision{
-        position: relative;
-        height: 100vh;
-        display: flex;
-        .arriba{
-            position: relative;
-            height: 50%;
-            border: white 1px solid;
-        }
-        .abajo{
-            position: relative;
-            height: 50%; 
-        }
-        .izq{
-            width: 50%;
-            svg{
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                margin: 0 auto;
-                transform: translate(-50%, -50%);
-                -webkit-transform: translate(-50%, -50%);
-                fill:$lightBlue;
-            }
-        }
-        .der{
-            width: 50%;
-            text-align: center;
-            h1{
-                color:$darkBlue
-            }
-        }
-    }
-    $space:25%;
-    .aspiracion{
-        position: relative;
-        height: 100vh;
-        display:flex;
-        .circles{
-            z-index: 10;
-            position: absolute;
-            left: 50%;
-            top: 40%;
-            margin: 0 auto;
-            transform: translate(-50%, -50%);
-            -webkit-transform: translate(-50%, -50%);
-            svg{
-                height: 100px;
-            }
-            stroke: $lightBlack;
-            stroke-width: 1;
-            fill: $lightBlack; 
-        }
-        .circle{
-            position: absolute;
-            margin: 0 auto;
-            transform: translate(-50%, -50%);
-            -webkit-transform: translate(-50%, -50%);
-            svg{
-                width: 354px;
-                height: 354px;
-            }
-            stroke: $lightBlue;
-            stroke-width: 1;
-            fill: $lightBlue;
-        }
+    .der{
+        width: 50%;
+        text-align: center;
         h1{
-            color:$white;
-            position: absolute;
-            left: 50%;
-            top: 35%;
-            margin: 0 auto;
-            transform: translate(-50%, -50%);
-            -webkit-transform: translate(-50%, -50%);
-        }
-        p{
-            position: absolute;
-            margin: 0 auto;
-        }
-        .izq{
-            .circle{
-                left: $space;
-                top: 50%;
-            }
-            p{
-                left: 50%;
-                top: 50%; 
-            }
-            height: 100vh;
-            width: 50%;
-            position: relative;
-
-        }
-        .der{
-            .circle{
-                left: 100%-$space;
-                top: 50%;
-            }
-            p{
-                text-align: right;
-                right:50%;
-                top: 50%;
-            }
-            height: 100vh;
-            width: 50%;
-            position: relative;
+            color:$darkBlue
         }
     }
 }
+
+.aspiracion{
+    position: relative;
+    height: 100vh;
+    display:flex;
+    .circles{
+        z-index: 10;
+        position: absolute;
+        left: 50%;
+        top: 40%;
+        margin: 0 auto;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        svg{
+            height: 100px;
+        }
+        stroke: $lightBlack;
+        stroke-width: 1;
+        fill: $lightBlack; 
+    }
+    .circle{
+        position: absolute;
+        margin: 0 auto;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        svg{
+            width: 354px;
+            height: 354px;
+        }
+        stroke: $lightBlue;
+        stroke-width: 1;
+        fill: $lightBlue;
+    }
+    h1{
+        color:$white;
+        position: absolute;
+        left: 50%;
+        top: 35%;
+        margin: 0 auto;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+    }
+    p{
+        position: absolute;
+        margin: 0 auto;
+    }
+    .izq{
+        .circle{
+            left: $space;
+            top: 50%;
+        }
+        p{
+            left: 50%;
+            top: 50%; 
+        }
+        height: 100vh;
+        width: 50%;
+        position: relative;
+
+    }
+    .der{
+        .circle{
+            left: 100%-$space;
+            top: 50%;
+        }
+        p{
+            text-align: right;
+            right:50%;
+            top: 50%;
+        }
+        height: 100vh;
+        width: 50%;
+        position: relative;
+    }
+}
+
 
 //Portafolio
 

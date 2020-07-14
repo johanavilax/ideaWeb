@@ -11,6 +11,8 @@ import {CSSPlugin, Power4, Linear} from 'gsap/all'
 import gsap , { TimelineMax, TweenMax, TweenLite } from "gsap";
 
 import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
+//Scroll full page
+import {FullpageSection } from '@ap.cx/react-fullpage'
 gsap.registerPlugin(CSSPlugin)
 
 const Quienes= ()=>{
@@ -26,8 +28,8 @@ const Quienes= ()=>{
   }
   `)
 
-        //Ref
-        const preloaderRef = React.createRef<HTMLDivElement>()
+    //Ref
+    const preloaderRef = React.createRef<HTMLDivElement>()
     useEffect(()=>{
       ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax);
       const speed = 1
@@ -51,9 +53,10 @@ const Quienes= ()=>{
       })
       new ScrollMagic.Scene({
         triggerElement: ".oculto1",
-        duration :200,
+        duration :80,
         offset: -50
     }).setTween(tl).setPin(preloaderRef).addTo(controller1)
+
     },[])
     const circles = ()=>{
       var tamano = "1020"
@@ -66,12 +69,13 @@ const Quienes= ()=>{
       )
     }
  
-    
     return(
-        <div id="quienes" className="quienes">
+      <>
+        <FullpageSection>
+          <div className="itemSlider" id="inicio">
             <div className="container">
-              <div className="quienes1">
-              <div className='oculto1'/>
+              <div className="inicio">
+                <div className='oculto1' />
                 <div className="description">
                   Loremipsumdolorsitamet,consectetueradipiscingelit.Aeneancommodo
                   ligulaegetdolor.Aeneanmassa.Cumsociisnatoquepenatibusetmagnisdis
@@ -80,116 +84,117 @@ const Quienes= ()=>{
                   pedejusto,fringillavel,aliquetnec,vulputateeget,arcu.Inenimjusto,rhoncus
                 </div>
                 <div className="circle">
-                  <svg >
+                  <svg>
                     <circle cx="177" cy="177" r="177" />
                   </svg>
                 </div>
-                <div className="circles">
-                        <svg >
-                            <circle cx="220" cy="220" r="200" />
-                            <circle cx="220" cy="220" r="150" />
-                        </svg>
-                    </div>
               </div>
-              <div className="quienes2">
-                <div className="quienesSomos">
-                  <div className="title">
-                    <h1>
-                      <svg >
-                        <circle cx="20" cy="20" r="20" />
-                      </svg>
-                      Quienes Somos
-                    </h1>
+            </div>
+          </div>
+        </FullpageSection>
+        <FullpageSection>
+          <div id="quienes" className="itemSlider quienes2">
+            <div className="container">
+              <div className="quienesSomos">
+                <div className="title">
+                  <h1>
+                    <svg>
+                      <circle cx="20" cy="20" r="20" />
+                    </svg>
+                    Quienes Somos
+                  </h1>
+                </div>
+                <div className="separador">
+                  <div className="imagen">
+                    <div className="image">
+                      <Img fluid={data.icono.childImageSharp.fluid} />
+                    </div>
                   </div>
-                  <div className="separador">
-                    <div className="imagen">
-                      <div className="image">
-                        <Img fluid={data.icono.childImageSharp.fluid} />
-                      </div>
-                    </div>
-                    <div className="text">
-                        Loremipsumdolorsitamet,consectetuer
-                        adipiscingelit.Aeneancommodoligulaegetdolor.
-                        Aeneanmassa.Cumsociisnatoquepenatibuset
-                        magnisdisparturientmontes,nasceturridiculus
-                        mus.Donecquamfelis,ultriciesnec,pellentesque
-                        eu,pretiumquis,sem.Nullaconsequatmassaqu
-                    </div>
+                  <div className="text">
+                    Loremipsumdolorsitamet,consectetuer
+                    adipiscingelit.Aeneancommodoligulaegetdolor.
+                    Aeneanmassa.Cumsociisnatoquepenatibuset
+                    magnisdisparturientmontes,nasceturridiculus
+                    mus.Donecquamfelis,ultriciesnec,pellentesque
+                    eu,pretiumquis,sem.Nullaconsequatmassaqu
                   </div>
                 </div>
               </div>
-              <div className="misionVision">
-                  <div className="izq">
-                      <div className="arriba">
-                        <svg width="600" height="300">
-                          <rect width="600" height="300"  />
-                        </svg>
-                      </div>
-                      <div className="abajo">
-                        <svg width="600" height="300">
-                          <rect width="600" height="300"  />
-                        </svg>
-                      </div>
-                  </div>
-                  <div className="der">
-                      <div className="arriba">
-                          <h1>Misión</h1>   
-                          <p>
-                          Loremipsumdolorsitamet,consectetueradipiscing
-                          elit.Aeneancommodoligulaegetdolor.Aenean
-                          massa.Cumsociisnatoquepenatibusetmagnisdis
-                          parturientmontes,nasceturridiculusmus.Donec
-                          </p>
-                      </div>
-                      <div className="abajo">
-                          <h1>Visión</h1>     
-                          <p>
-                          Loremipsumdolorsitamet,consectetueradipiscing
-                          elit.Aeneancommodoligulaegetdolor.Aenean
-                          massa.Cumsociisnatoquepenatibusetmagnisdis
-                          parturientmontes,nasceturridiculusmus.Donec
-                          </p>
-                      </div>
-                  </div>
+            </div>
+          </div>
+        </FullpageSection>
+        <FullpageSection>
+          <div className="itemSlider misionVision">
+            <div className="izq">
+              <div className="arriba">
+                <svg width="600" height="300">
+                  <rect width="600" height="300" />
+                </svg>
               </div>
-              <div className="aspiracion">
-                  <div className="circles">
-                    {circles()}
-                  </div>
-                  <div className="izq">
-                    <div className="circle">
-                      <svg >
-                        <circle cx="177" cy="177" r="177" />
-                      </svg>
-                      <h1>Aspiración</h1>
-                      <p>
-                        Loremipsumdolorsitamet,consectetueradipiscing
-                        elit.Aeneancommodoligulaegetdolor.Aenean
-                        massa.Cumsociisnatoquepenatibusetmagnisdis
-                        parturientmontes,nasceturridiculusmus.Donec
-                      </p>
-                    </div>
-                  </div>
-                  <div className="der">
-                    <div className="circle">
-                      <svg >
-                        <circle cx="177" cy="177" r="177" />
-                      </svg>
-                      <h1>Trayectoria</h1>
-                      <p>
-                        Loremipsumdolorsitamet,consectetueradipiscing
-                        elit.Aeneancommodoligulaegetdolor.Aenean
-                        massa.Cumsociisnatoquepenatibusetmagnisdis
-                        parturientmontes,nasceturridiculusmus.Donec
-                      </p>
-                    </div>
-                  </div>
+              <div className="abajo">
+                <svg width="600" height="300">
+                  <rect width="600" height="300" />
+                </svg>
               </div>
-           </div>
- 
-
-        </div>
-
+            </div>
+            <div className="der">
+              <div className="arriba">
+                <h1>Misión</h1>
+                <p>
+                  Loremipsumdolorsitamet,consectetueradipiscing
+                  elit.Aeneancommodoligulaegetdolor.Aenean
+                  massa.Cumsociisnatoquepenatibusetmagnisdis
+                  parturientmontes,nasceturridiculusmus.Donec
+                </p>
+              </div>
+              <div className="abajo">
+                <h1>Visión</h1>
+                <p>
+                  Loremipsumdolorsitamet,consectetueradipiscing
+                  elit.Aeneancommodoligulaegetdolor.Aenean
+                  massa.Cumsociisnatoquepenatibusetmagnisdis
+                  parturientmontes,nasceturridiculusmus.Donec
+                </p>
+              </div>
+            </div>
+          </div>
+        </FullpageSection>
+        <FullpageSection>
+          <div className="itemSlider aspiracion">
+            <div className="circles">
+              {circles()}
+            </div>
+            <div className="izq">
+              <div className="circle">
+                <svg>
+                  <circle cx="177" cy="177" r="177" />
+                </svg>
+                <h1>Aspiración</h1>
+                <p>
+                  Loremipsumdolorsitamet,consectetueradipiscing
+                  elit.Aeneancommodoligulaegetdolor.Aenean
+                  massa.Cumsociisnatoquepenatibusetmagnisdis
+                  parturientmontes,nasceturridiculusmus.Donec
+                </p>
+              </div>
+            </div>
+            <div className="der">
+              <div className="circle">
+                <svg>
+                  <circle cx="177" cy="177" r="177" />
+                </svg>
+                <h1>Trayectoria</h1>
+                <p>
+                  Loremipsumdolorsitamet,consectetueradipiscing
+                  elit.Aeneancommodoligulaegetdolor.Aenean
+                  massa.Cumsociisnatoquepenatibusetmagnisdis
+                  parturientmontes,nasceturridiculusmus.Donec
+                </p>
+              </div>
+            </div>
+          </div>
+        </FullpageSection>
+      </>
     )
 }
 

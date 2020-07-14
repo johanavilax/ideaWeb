@@ -1,22 +1,34 @@
-import React from "react"
+import React, {useState,useRef} from "react"
 import "../styles/styles.scss"
 import Header from  "../components/header"
 import Quienes from "../components/quienes"
 import Start from "../components/start"
 import Portafolio from "../components/portafolio"
 import Servicios from "../components/servicios"
-// import { FullPage} from 'react-full-page';
-const Index = () => (
-<>
-<Header/>
-  <Start/>
-  <Quienes/>
-  <Servicios/>
-  <Portafolio/>
+//FullPage
+import Fullpage, { FullPageSections ,FullpageNavigation} from '@ap.cx/react-fullpage'
+const Index = () => {
+  const onShowSlider = (e)=>{
+    console.log(e)
+  }
+  const scrollRef = React.createRef<HTMLDivElement>()
+  return(
+<> 
+<Header scroll={scrollRef} />s
+<Start scroll={scrollRef} />
+<Fullpage ref={scrollRef} onChange={(e)=>onShowSlider(e)}>
+<FullpageNavigation/>
 
+  <FullPageSections>
+
+    <Quienes />
+    <Servicios />
+    
+  </FullPageSections>
+</Fullpage>
 
 
 </>
-)
+)}
 
 export default Index

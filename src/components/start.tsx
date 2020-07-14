@@ -1,14 +1,18 @@
-import React , {useEffect,createRef} from "react"
+import React , {useState,useEffect,createRef} from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 // import { Link } from "gatsby"
 import {Link} from "react-scroll"
 import lottie from "lottie-web"
 
+//Scroll full page
+import {FullpageSection } from '@ap.cx/react-fullpage'
+// //Gsap
+import {CSSPlugin, Power4, Linear} from 'gsap/all'
+import gsap , { TimelineMax, TweenMax, TweenLite } from "gsap";
 
-
-
-const Start = ()=>{
+const Start = (props)=>{
+  const {scroll} = props
   const data = useStaticQuery(graphql `
   query {
     start: file(relativePath: { eq: "idea.png" }) {
@@ -24,37 +28,37 @@ const Start = ()=>{
 
   //Ref
   const preloaderRef = createRef<HTMLDivElement>()
+  const [displayPreloader, setDisplayPreloader] = useState("inherit")
+  const [isLoading, setisLoading] = useState(true)
     useEffect(() => {
       const anim = lottie.loadAnimation({
         container: preloaderRef.current,
         renderer: "svg",
         loop: false,
-        autoplay: true,
+        autoplay: false,
         animationData: require("../animations/preloader.json"),
       });
+      anim.addEventListener('DOMLoaded', () => {
+        if(isLoading){
+          anim.play()
+        }
+      } )
       anim.addEventListener("complete", function () {
-           var elmnt = document.getElementById("quienes");
-           elmnt.scrollIntoView({behavior: "smooth"});
+        const start = document.getElementById("start")
+        const t1 = new TimelineMax({paused: true});
+        t1.to(start,1,{top:"-100%"}).play()
+        setTimeout(() => {
+          setDisplayPreloader('none')
+          setisLoading(false)
+          }, 1000);
         })
     }, []);
   
     return(
-        <div className="start" id="start">
+
+        <div className="start"  style={{display:displayPreloader}} id="start">
             <div className="container">
                         <div className="mainImage" ref={preloaderRef}/>
-                    <div className="circles">
-                        <svg >
-                            <circle cx="220" cy="220" r="200" />
-                            <circle cx="220" cy="220" r="150" />
-                        </svg>
-                    </div>
-                    <div className="scrollDown">
-                      <Link to="quienes" smooth={true} duration={1000}>
-                        <div className="App">
- 
-                        </div>
-                      </Link>
-                    </div>
             </div>
         </div>
 
