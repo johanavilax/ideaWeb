@@ -6,35 +6,15 @@ import lottie from "lottie-web"
 //ScrollMagic
 import ScrollMagic from "scrollmagic";
 //Gsap
-import {CSSPlugin, Power4, Linear, gsap} from 'gsap/all'
-import { TimelineMax, TweenMax, TweenLite } from "gsap";
-
+import {CSSPlugin, Power4, Linear, gsap } from 'gsap/all'
+import { TimelineMax, TweenMax, TweenLite,TimelineLite} from "gsap";
 import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
-const isElementTotallyVisible=(elto)=> {
-  var anchoViewport = window.innerWidth || document.documentElement.clientWidth;
-  var alturaViewport = window.innerHeight || document.documentElement.clientHeight;
-  //Posición de la caja del elemento
-  var caja = elto.getBoundingClientRect();
-  return ( caja.top >= 0 && 
-           caja.bottom <= alturaViewport &&
-           caja.left >= 0 &&
-           caja.right <= anchoViewport );
-}
-const inViewportTotally = (elto, handler)=> {
-  var anteriorVisibilidad = isElementTotallyVisible(elto);    
+// const circulo = require("../images/circulo.svg") ;
+// const circulo2 = require("../images/circulo2.svg") ;
 
-   const detectarPosibleCambio = () =>{
-      var esVisible = isElementTotallyVisible(elto);
-      if (esVisible != anteriorVisibilidad) { 
-          anteriorVisibilidad = esVisible;
-          if (typeof handler == "function")
-              handler(esVisible, elto);
-      }
-  }
-  window.addEventListener("load", detectarPosibleCambio);
-  window.addEventListener("resize", detectarPosibleCambio);
-  window.addEventListener("scroll", detectarPosibleCambio);
-}
+import circulo from '../images/circulo.svg'
+
+
 const Header = (props) => {
 
   const {scroll} = props
@@ -61,10 +41,9 @@ const Header = (props) => {
       const logo = document.getElementById('logo');
       const inicio = document.getElementById("inicio");
       const quienes = document.getElementById("quienes");
-      const servicios = document.getElementById("servicios");
-      const portafolio = document.getElementById("portafolio");
-      const contacto = document.getElementById("contacto");
-
+      // const servicios = document.getElementById("servicios");
+      // const portafolio = document.getElementById("portafolio");
+      // const contacto = document.getElementById("contacto");
       ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax);
       const anim = lottie.loadAnimation({
         container: preloaderRef.current,
@@ -92,7 +71,8 @@ const Header = (props) => {
         const t2 = new TimelineMax({ 
           onComplete:function()
           {	
-            logo.addEventListener("click",()=>{
+            const logo2 = (logo.querySelectorAll("svg")[0].querySelectorAll("g")[0])
+            logo2.addEventListener("click",()=>{
               inicio.scrollIntoView({behavior: "smooth"});
             })
             setanimated(true)
@@ -106,23 +86,44 @@ const Header = (props) => {
 
        })
 
+  
       
-       const cambiaVisibilidad =(visible, elemento)=>{
-         if(visible){
-          setactualPosition(elemento.id)
-         }
-       }
+     
+       /// animacion circulos
+       const c1 = document.getElementById("circulo1")
+       const c1Anim = TweenMax.to(c1, 2, {rotation:360,paused:false,ease:Linear.easeNone});
+       const c2 = document.getElementById("circulo2")
+       const c2Anim = TweenMax.to(c2, 2, {rotation:-360,paused:false,ease:Linear.easeNone});  
+       document.addEventListener("scroll", (e)=>{
+        // const elementos = [inicio,quienes,servicios,portafolio]
+        const elementos = [inicio,quienes]
+        for (let k = 0; k < elementos.length; k++) {
+          
+          const screenPosition = elementos[k].getBoundingClientRect();  
 
-       inViewportTotally(inicio, cambiaVisibilidad);
-       inViewportTotally(quienes, cambiaVisibilidad);
-       inViewportTotally(servicios, cambiaVisibilidad);
-      //  inViewportTotally(portafolio, cambiaVisibilidad);
-      //  inViewportTotally(contacto, cambiaVisibilidad);
+          if(screenPosition.top <= 0 && screenPosition.bottom <= screenPosition.height){
+            if(c1Anim.progress()===1 || c1Anim.progress()===0){
+              if(c1Anim.reversed()){
+                c1Anim.play();
+                c2Anim.play();
+            }    else {
+                c1Anim.reverse();
+                c2Anim.reverse();
+            }
+            }
+            if(document.getElementById("actualNav").innerHTML !== elementos[k].id){
+              setactualPosition(elementos[k].id)
+
+            }
+          }
+        }
+       });
     }, []);
-    const clickMenu = ()=>{
-      
-      console.log(scroll.current)
-    }
+    useEffect(()=>{
+      const text = document.getElementById("actualNav")
+      const textAnim = new TimelineMax({ })
+      textAnim.fromTo(text,1,{color:"black"},{color:"#0cb1f1"},'start').play()
+    },[actualPosition])
   return (
     <>
     <header >
@@ -133,21 +134,27 @@ const Header = (props) => {
               </div>
               <div className="navigation">
                 <nav>
-                  <a onClick={clickMenu} >Quiénes somos</a>
-                  <a onClick={clickMenu} >Servicios</a>
-                  <a onClick={clickMenu} >Portafolio</a>
-                  <a onClick={clickMenu} >Contacto</a>
+                <Link smooth={true} to="quienes" >Quiénes somos</Link>
+                <Link  to="/servicios" >Servicios</Link>
+                <Link  to="/portafolio" >Portafolio</Link>
+                <Link smooth={true} to="contacto" >Contacto</Link>
                 </nav>
               </div>
             </div>
       </div>
     </header>
     <div className="circles">
-      <h1>{actualPosition}</h1>
-      <svg >
-          <circle cx="220" cy="220" r="200" />
-          <circle cx="220" cy="220" r="150" />
-      </svg>
+      <div className="containCircles">
+      <h1 id="actualNav">{actualPosition}</h1>
+        {/* <svg id="circulo1">
+            <circle  cx="220" cy="220" r="200" />
+        </svg>
+        <svg id="circulo2">
+        <circle cx="220" cy="220" r="150" />
+        </svg> */}
+        <img id="circulo1" src={circulo} />
+        <img id="circulo2" src={circulo} />
+      </div>
     </div>
   </>
   )

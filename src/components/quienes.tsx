@@ -6,16 +6,24 @@ import Img from "gatsby-image"
 import lottie from 'lottie-web'
 //ScrollMagic
 import * as ScrollMagic from "scrollmagic";
+import "scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators"
 // //Gsap
 import {CSSPlugin, Power4, Linear} from 'gsap/all'
-import gsap , { TimelineMax, TweenMax, TweenLite } from "gsap";
+import gsap , { TimelineMax, TweenMax, TweenLite,Back } from "gsap";
 
 import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
 //Scroll full page
 import {FullpageSection } from '@ap.cx/react-fullpage'
+import bombillo1 from '../images/bombillos/bombillo1.svg'
+import bombillo2 from '../images/bombillos/bombillo2.svg'
+import bombillo3 from '../images/bombillos/bombillo3.svg'
+import bombillo4 from '../images/bombillos/bombillo4.svg'
+import bombillo5 from '../images/bombillos/bombillo5.svg'
+
 gsap.registerPlugin(CSSPlugin)
 
-const Quienes= ()=>{
+const Quienes= (props)=>{
+  const {start}=props
   const data = useStaticQuery(graphql `
   query {
     icono: file(relativePath: { eq: "logo.png" }) {
@@ -27,37 +35,109 @@ const Quienes= ()=>{
     }
   }
   `)
+  const [actualBombillo,setactualBombillo]=useState(bombillo1)
 
     //Ref
     const preloaderRef = React.createRef<HTMLDivElement>()
     useEffect(()=>{
-      ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax);
-      const speed = 1
-      var second = (document.getElementById("quienes1"))
-      const anim = lottie.loadAnimation({
-        renderer: 'svg',
-        container: preloaderRef.current,
-        animationData: require("../animations/preloader.json"),
-        autoplay: false,
-        loop: false,
-    })
-    const controller1 =  new ScrollMagic.Controller()
-    const tl = new TimelineMax();
+      console.log(actualBombillo)
 
-    tl.to({frame: 0}, 1 ,{
-      frame: anim.totalFrames-1,
-      onUpdate: (e)=>{
-          anim.goToAndStop((Math.round(tl.progress() * 300 * speed)), true)
-      },
-      ease: Linear.easeNone,
-      })
-      new ScrollMagic.Scene({
-        triggerElement: ".oculto1",
-        duration :80,
-        offset: -50
-    }).setTween(tl).setPin(preloaderRef).addTo(controller1)
+    },[actualBombillo])
 
-    },[])
+    useEffect(()=>{
+      var bombillos = [bombillo1,bombillo2,bombillo3,bombillo3,bombillo4,bombillo5]
+      const height = window.innerHeight
+      const width = window.innerWidth
+      var porcentaje= -50;
+      var interval
+
+      if(start){
+        var oldScroll = 0;
+        document.addEventListener("scroll", (e)=>{
+          //animacion texto descripcion inicio ------------------
+          var desc = document.getElementById("descriptionInicio")
+          var descF = document.getElementById("descriptionInicioF")
+          // const screenPosition = desc.getBoundingClientRect(); 
+          // console.log(screenPosition.top) 
+          if( window.scrollY <= height ){
+            if(oldScroll < window.scrollY){
+              porcentaje = porcentaje +Math.abs(oldScroll-window.scrollY)/4
+            }else{
+              porcentaje = porcentaje -Math.abs(oldScroll-window.scrollY)/4
+            }
+
+            if(porcentaje >= -50 && porcentaje <= 20){
+              porcentaje=porcentaje
+            }else if(porcentaje <-50){
+              porcentaje = -50
+            }else if(porcentaje > 20){
+              porcentaje = 20
+            }
+            desc.style.top = `${porcentaje}%`;
+            descF.style.top = `${porcentaje}%` ;
+          }
+          oldScroll = window.scrollY;
+          //-------------------------------------------------------
+          ///mision vision ----------------------------
+          
+          //---------------------
+
+        })
+        //tarjeta de quienes somos animacion ------------------------
+        var controller = new ScrollMagic.Controller();
+        const t2 = new TimelineMax({ 
+          onUpdate: (e,s)=>{
+            if(interval){
+              clearInterval(interval);
+            }
+            const time = 0.2
+            var count = 1
+            for (let times = 0; times <= 1; times=times+time) {
+              if(times < t2.progress() && t2.progress() < times+time){
+                setactualBombillo(bombillos[count])
+              }
+              count ++
+            }
+       
+        },
+        onComplete:()=>{
+          function wait(ms)
+          {
+              var d = new Date();
+              var d2 = new Date();
+              do { d2 = new Date(); }
+              while(d2-d < ms);
+          }
+          // interval = setInterval(()=>{
+
+            // for (let k = 1; k < bombillos.length; k++) {
+            //   console.time("test")
+            //   console.log("seteando",k)
+            //   wait(2000)
+            //   setactualBombillo(bombillos[k])
+            //   console.timeEnd("test")
+            // }
+
+          // },1000)
+
+        }
+        })
+        var tween = t2.fromTo(".quienesSomos", 1, {left: width*1.2}, {left: width/2});
+        var scene = new ScrollMagic.Scene({triggerElement: "#quienes2", offset:50,duration: 500})
+            .setTween(tween)
+            // .addIndicators({name: "staggering"}) // add indicators (requires plugin)
+            .addTo(controller);
+        //----------------------------------------------------------
+        ///mision vision ----------------------------
+        var misionControl = new ScrollMagic.Controller();
+        var scene = new ScrollMagic.Scene({triggerElement: "#izqMision", duration: height*0.8,offset:80})
+        .setPin("#izqMision")
+        .addIndicators({name: "1 (duration: 300)"}) // add indicators (requires plugin)
+        .addTo(controller);        
+        //---------------------
+      }
+    },[start])
+
     const circles = ()=>{
       var tamano = "1020"
       return (
@@ -68,88 +148,99 @@ const Quienes= ()=>{
       </>
       )
     }
- 
+ /// TODO:
+//  targeta hacia la izquierda con scroll 
+//  bombillo palpitante degrade
+//  cambiar color del circulo
+//  mision vision foto grande cambia con scroll
+//  trayecto puntos aparecen cuando toquen aparece a abajo hacia arraba
+//   circulos se juntan y  quedan como el fondo de las fotos automatizacion
+//  proyectos y servicios aparte
+
     return(
       <>
-        <FullpageSection>
-          <div className="itemSlider" id="inicio">
-            <div className="container">
-              <div className="inicio">
-                <div className='oculto1' />
-                <div className="description">
+      <div id="inicio" >
+        <div className="container">
+          <div className="inicio">
+            <div className='oculto1' />
+            <div className="containerCircle">
+            <div  id="descriptionInicio" className="descriptionInicio">
                   Loremipsumdolorsitamet,consectetueradipiscingelit.Aeneancommodo
                   ligulaegetdolor.Aeneanmassa.Cumsociisnatoquepenatibusetmagnisdis
                   parturientmontes,nasceturridiculusmus.Donecquamfelis,ultriciesnec,
                   pellentesqueeu,pretiumquis,sem.Nullaconsequatmassaquisenim.Donec
                   pedejusto,fringillavel,aliquetnec,vulputateeget,arcu.Inenimjusto,rhoncus
                 </div>
-                <div className="circle">
+              <div className="circle">
+
+
+                <div  id="descriptionInicioF" className="descriptionInicio">
+                  Loremipsumdolorsitamet,consectetueradipiscingelit.Aeneancommodo
+                  ligulaegetdolor.Aeneanmassa.Cumsociisnatoquepenatibusetmagnisdis
+                  parturientmontes,nasceturridiculusmus.Donecquamfelis,ultriciesnec,
+                  pellentesqueeu,pretiumquis,sem.Nullaconsequatmassaquisenim.Donec
+                  pedejusto,fringillavel,aliquetnec,vulputateeget,arcu.Inenimjusto,rhoncus
+                </div>
+              </div>
+            </div>
+           
+          </div>
+        </div>
+
+      </div>
+
+      <div id="quienes" className="quienes">
+        <div className="container">
+          <div id="quienes2" className="quienes2">
+            <div className="quienesSomos">
+              <div className="title">
+                <h1>
                   <svg>
-                    <circle cx="177" cy="177" r="177" />
+                    <circle cx="20" cy="20" r="20" />
                   </svg>
+                  Quienes Somos
+                </h1>
+              </div>
+              <div className="separador">
+                <div className="imagen">
+                  <div className="image">
+                    <img src={actualBombillo} />
+                  </div>
+                </div>
+                <div className="text">
+                  Loremipsumdolorsitamet,consectetuer
+                  adipiscingelit.Aeneancommodoligulaegetdolor.
+                  Aeneanmassa.Cumsociisnatoquepenatibuset
+                  magnisdisparturientmontes,nasceturridiculus
+                  mus.Donecquamfelis,ultriciesnec,pellentesque
+                  eu,pretiumquis,sem.Nullaconsequatmassaqu
                 </div>
               </div>
             </div>
           </div>
-        </FullpageSection>
-        <FullpageSection>
-          <div id="quienes" className="itemSlider quienes2">
-            <div className="container">
-              <div className="quienesSomos">
-                <div className="title">
-                  <h1>
-                    <svg>
-                      <circle cx="20" cy="20" r="20" />
-                    </svg>
-                    Quienes Somos
-                  </h1>
-                </div>
-                <div className="separador">
-                  <div className="imagen">
-                    <div className="image">
-                      <Img fluid={data.icono.childImageSharp.fluid} />
-                    </div>
-                  </div>
-                  <div className="text">
-                    Loremipsumdolorsitamet,consectetuer
-                    adipiscingelit.Aeneancommodoligulaegetdolor.
-                    Aeneanmassa.Cumsociisnatoquepenatibuset
-                    magnisdisparturientmontes,nasceturridiculus
-                    mus.Donecquamfelis,ultriciesnec,pellentesque
-                    eu,pretiumquis,sem.Nullaconsequatmassaqu
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </FullpageSection>
-        <FullpageSection>
-          <div className="itemSlider misionVision">
-            <div className="izq">
-              <div className="arriba">
-                <svg width="600" height="300">
-                  <rect width="600" height="300" />
-                </svg>
+          <div className="misionVision">
+            <div className="izq" id="izqMision">
+            <div className="arriba" id="mision">
+              <img src={require("../images/mision.jpg")}/>
               </div>
               <div className="abajo">
-                <svg width="600" height="300">
-                  <rect width="600" height="300" />
-                </svg>
+                <img src={require("../images/vision.jpg")}/>
               </div>
             </div>
             <div className="der">
               <div className="arriba">
-                <h1>Misión</h1>
+
                 <p>
+                 <h1>Misión</h1>
                   Loremipsumdolorsitamet,consectetueradipiscing
                   elit.Aeneancommodoligulaegetdolor.Aenean
                   massa.Cumsociisnatoquepenatibusetmagnisdis
                   parturientmontes,nasceturridiculusmus.Donec
                 </p>
               </div>
-              <div className="abajo">
-                <h1>Visión</h1>
+              <div className="arriba">
                 <p>
+                  <h1>Visión</h1>
                   Loremipsumdolorsitamet,consectetueradipiscing
                   elit.Aeneancommodoligulaegetdolor.Aenean
                   massa.Cumsociisnatoquepenatibusetmagnisdis
@@ -158,9 +249,7 @@ const Quienes= ()=>{
               </div>
             </div>
           </div>
-        </FullpageSection>
-        <FullpageSection>
-          <div className="itemSlider aspiracion">
+          <div className="aspiracion">
             <div className="circles">
               {circles()}
             </div>
@@ -193,7 +282,10 @@ const Quienes= ()=>{
               </div>
             </div>
           </div>
-        </FullpageSection>
+        </div>
+      </div>
+
+
       </>
     )
 }

@@ -12,7 +12,7 @@ import {CSSPlugin, Power4, Linear} from 'gsap/all'
 import gsap , { TimelineMax, TweenMax, TweenLite } from "gsap";
 
 const Start = (props)=>{
-  const {scroll} = props
+  const {setstart} = props
   const data = useStaticQuery(graphql `
   query {
     start: file(relativePath: { eq: "idea.png" }) {
@@ -44,12 +44,12 @@ const Start = (props)=>{
         }
       } )
       anim.addEventListener("complete", function () {
-        const start = document.getElementById("start")
-        const t1 = new TimelineMax({paused: true});
-        t1.to(start,1,{top:"-100%"}).play()
+        var elmnt = document.getElementById("inicio");
+        elmnt.scrollIntoView({behavior: "smooth"});
         setTimeout(() => {
           setDisplayPreloader('none')
           setisLoading(false)
+          setstart(true)
           }, 1000);
         })
     }, []);

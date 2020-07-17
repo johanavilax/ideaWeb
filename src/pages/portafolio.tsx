@@ -53,10 +53,9 @@ const Portafolio = () => {
   }
   return (
     <>
-    <div className="portafolio">
+    <div id="portafolio" className="portafolio">
         <div className="container">
-            <FullpageSection>
-             <div id="portafolio" className="itemSlider portafolio1">
+            <div className="portafolio1">
                 <div className="description">
                   <div className="title">
                   <h1>
@@ -83,9 +82,7 @@ const Portafolio = () => {
                   </div>
                 </div>
             </div>
-            </FullpageSection>
-            <FullpageSection>
-             <div className="auto itemSlider">
+            <div className="auto">
                     <h1>Automatización</h1>
                     <div className="gallery">
                         <div className="izq">
@@ -113,9 +110,7 @@ const Portafolio = () => {
                         </div>
                     </div>
             </div>
-            </FullpageSection>
-            <FullpageSection>
-              <div className="proyecto itemSlider">
+            <div className="proyecto">
                 <div className="card">
                   <div className="title">
                     <h1>
@@ -142,14 +137,11 @@ const Portafolio = () => {
                   </div>
                 </div>
             </div>
-            </FullpageSection>
-            <FullpageSection>
-             <div className="proyectos itemSlider">
+            <div className="proyectos">
                 {circle()}
                 {circle()}
                 {circle()}
             </div>
-            </FullpageSection>
         </div>
     </div>
    
