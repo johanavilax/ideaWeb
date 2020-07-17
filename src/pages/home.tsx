@@ -8,14 +8,10 @@ import Start from "../components/start"
 const Home = () => {
   const [start,setstart]=useState(false)
   return(
-<> 
+<>
     <Header/>
     <Start setstart={setstart}/>
     <Quienes start={start}/>
-
-
-
-
 </>
 )}
 
