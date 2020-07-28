@@ -12,8 +12,7 @@ import {CSSPlugin, Power4, Linear} from 'gsap/all'
 import gsap , { TimelineMax, TweenMax, TweenLite,Back } from "gsap";
 
 import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
-//Scroll full page
-import {FullpageSection } from '@ap.cx/react-fullpage'
+
 import bombillo1 from '../images/bombillos/bombillo1.svg'
 import bombillo2 from '../images/bombillos/bombillo2.svg'
 import bombillo3 from '../images/bombillos/bombillo3.svg'
@@ -23,6 +22,7 @@ import bombillo5 from '../images/bombillos/bombillo5.svg'
 gsap.registerPlugin(CSSPlugin)
 
 const Quienes= (props)=>{
+
   const {start}=props
   const data = useStaticQuery(graphql `
   query {
@@ -32,15 +32,30 @@ const Quienes= (props)=>{
           ...GatsbyImageSharpFluid
         }
       }
-    }
+    },
+    doc: file(relativePath: { eq: "documento.png" }) {
+        childImageSharp {
+          fluid(maxWidth: 300) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      },
+      proyecto: file(relativePath: { eq: "proyectos.png" }) {
+        childImageSharp {
+          fluid(maxWidth: 300) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
   }
   `)
+
   const [actualBombillo,setactualBombillo]=useState(bombillo1)
 
     //Ref
     const preloaderRef = React.createRef<HTMLDivElement>()
     useEffect(()=>{
-      console.log(actualBombillo)
+      // console.log(actualBombillo)
 
     },[actualBombillo])
 
@@ -50,10 +65,14 @@ const Quienes= (props)=>{
       const width = window.innerWidth
       var porcentaje= -50;
       var interval
-
       if(start){
         var oldScroll = 0;
-        document.addEventListener("scroll", (e)=>{
+
+        const scrollFun = (e)=>{
+          const actualPos = window.location.pathname
+          if(actualPos!=="/"){
+            removeEventListener("scroll",scrollFun)
+          }else{
           //animacion texto descripcion inicio ------------------
           var desc = document.getElementById("descriptionInicio")
           var descF = document.getElementById("descriptionInicioF")
@@ -81,8 +100,10 @@ const Quienes= (props)=>{
           ///mision vision ----------------------------
           
           //---------------------
+        }
+        }
+        const quienesScroll = document.addEventListener("scroll",scrollFun)
 
-        })
         //tarjeta de quienes somos animacion ------------------------
         var controller = new ScrollMagic.Controller();
         const t2 = new TimelineMax({ 
@@ -130,10 +151,16 @@ const Quienes= (props)=>{
         //----------------------------------------------------------
         ///mision vision ----------------------------
         var misionControl = new ScrollMagic.Controller();
-        var scene = new ScrollMagic.Scene({triggerElement: "#izqMision", duration: height*0.8,offset:80})
+        var scene = new ScrollMagic.Scene({triggerElement: "#izqMision", duration: height*0.8,offset:height*0.8*0.5})        
         .setPin("#izqMision")
         .addIndicators({name: "1 (duration: 300)"}) // add indicators (requires plugin)
-        .addTo(controller);        
+        .addTo(controller);     
+        for (let k = 0; k < bombillos.length; k++) {
+          setTimeout(()=>{
+            setactualBombillo(bombillos[k])
+          },1000)
+          
+        }   
         //---------------------
       }
     },[start])
@@ -149,19 +176,45 @@ const Quienes= (props)=>{
       )
     }
  /// TODO:
+//inicio imagenes de abajo hacia arriba
 //  targeta hacia la izquierda con scroll 
-//  bombillo palpitante degrade
-//  cambiar color del circulo
-//  mision vision foto grande cambia con scroll
 //  trayecto puntos aparecen cuando toquen aparece a abajo hacia arraba
 //   circulos se juntan y  quedan como el fondo de las fotos automatizacion
 //  proyectos y servicios aparte
+//servicios en scrollhorizonatal
+// cambiar nombre de servicios a portafolio
+// cambiar de proyecto a portafolio
+//en proyecto poner de fondo videos
+//inicio poner imagenes en transicion 
+
+const circle= ()=>{
+  return(
+    <>
+      <div className="circle">
+        <svg >
+        <circle cx="177" cy="177" r="177" />
+        </svg>
+          <h1>Proyecto</h1>
+          <p>
+            Loremipsumdolorsitamet,consectetuer
+            adipiscingelit.Aeneancommodoligulaegetdolor.
+          </p>
+      </div>
+    </>
+  )
+}
 
     return(
       <>
       <div id="inicio" >
         <div className="container">
           <div className="inicio">
+            <div className="image">
+                  <div className="box red" id="box1">1</div>
+                  <div className="box green" id="box2">2</div>
+                  <div className="box blue" id="box3"/>
+                <div  className="gradient"/>
+            </div>
             <div className='oculto1' />
             <div className="containerCircle">
             <div  id="descriptionInicio" className="descriptionInicio">
@@ -281,6 +334,38 @@ const Quienes= (props)=>{
                 </p>
               </div>
             </div>
+          </div>
+          <div className="proyecto">
+            <div className="card">
+              <div className="title">
+                <h1>
+                  <svg>
+                    <circle cx="20" cy="20" r="20" />
+                  </svg>
+                  Proyectos
+                </h1>
+              </div>
+              <div className="separador">
+                <div className="imagen">
+                  <div className="image">
+                    <Img fluid={data.proyecto.childImageSharp.fluid} />
+                  </div>
+                </div>
+                <div className="text">
+                  Loremipsumdolorsitamet,consectetuer
+                  adipiscingelit.Aeneancommodoligulaegetdolor.
+                  Aeneanmassa.Cumsociisnatoquepenatibuset
+                  magnisdisparturientmontes,nasceturridiculus
+                  mus.Donecquamfelis,ultriciesnec,pellentesque
+                  eu,pretiumquis,sem.Nullaconsequatmassaqu
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="proyectos">
+            {circle()}
+            {circle()}
+            {circle()}
           </div>
         </div>
       </div>
