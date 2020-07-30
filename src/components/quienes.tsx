@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect,useCallback,useContext} from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import Img from "gatsby-image"
+import Img from "gatsby-image/withIEPolyfill"
 
 //Lottie
 import lottie from 'lottie-web'
 //ScrollMagic
 import * as ScrollMagic from "scrollmagic";
-import "scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators"
+// import "scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators"
 // //Gsap
 import {CSSPlugin, Power4, Linear} from 'gsap/all'
 import gsap , { TimelineMax, TweenMax, TweenLite,Back } from "gsap";
@@ -19,11 +19,15 @@ import bombillo3 from '../images/bombillos/bombillo3.svg'
 import bombillo4 from '../images/bombillos/bombillo4.svg'
 import bombillo5 from '../images/bombillos/bombillo5.svg'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
+import TransitionLink from 'gatsby-plugin-transition-link'
 gsap.registerPlugin(CSSPlugin)
-
+//context transition
+import {TransitionContext} from '../context/transitionContext';
 const Quienes= (props)=>{
 
-  const {start}=props
+  const {animated, setanimated,finish,setfinish,to,setto} = useContext(TransitionContext)
   const data = useStaticQuery(graphql `
   query {
     icono: file(relativePath: { eq: "logo.png" }) {
@@ -46,12 +50,25 @@ const Quienes= (props)=>{
             ...GatsbyImageSharpFluid
           }
         }
+      },
+      inicio: file(relativePath: { eq: "varias(2).jpg" }) {
+        childImageSharp {
+          fixed(width: 1000) {
+            ...GatsbyImageSharpFixed
+          }
+        }
+      }
+      quienes: file(relativePath: { eq: "varias(5).jpg" }) {
+        childImageSharp {
+          fixed(width: 3000) {
+            ...GatsbyImageSharpFixed
+          }
+        }
       }
   }
   `)
 
   const [actualBombillo,setactualBombillo]=useState(bombillo1)
-
     //Ref
     const preloaderRef = React.createRef<HTMLDivElement>()
     useEffect(()=>{
@@ -60,110 +77,12 @@ const Quienes= (props)=>{
     },[actualBombillo])
 
     useEffect(()=>{
-      var bombillos = [bombillo1,bombillo2,bombillo3,bombillo3,bombillo4,bombillo5]
-      const height = window.innerHeight
-      const width = window.innerWidth
-      var porcentaje= -50;
-      var interval
-      if(start){
-        var oldScroll = 0;
-
-        const scrollFun = (e)=>{
-          const actualPos = window.location.pathname
-          if(actualPos!=="/"){
-            removeEventListener("scroll",scrollFun)
-          }else{
-          //animacion texto descripcion inicio ------------------
-          var desc = document.getElementById("descriptionInicio")
-          var descF = document.getElementById("descriptionInicioF")
-          // const screenPosition = desc.getBoundingClientRect(); 
-          // console.log(screenPosition.top) 
-          if( window.scrollY <= height ){
-            if(oldScroll < window.scrollY){
-              porcentaje = porcentaje +Math.abs(oldScroll-window.scrollY)/4
-            }else{
-              porcentaje = porcentaje -Math.abs(oldScroll-window.scrollY)/4
-            }
-
-            if(porcentaje >= -50 && porcentaje <= 20){
-              porcentaje=porcentaje
-            }else if(porcentaje <-50){
-              porcentaje = -50
-            }else if(porcentaje > 20){
-              porcentaje = 20
-            }
-            desc.style.top = `${porcentaje}%`;
-            descF.style.top = `${porcentaje}%` ;
-          }
-          oldScroll = window.scrollY;
-          //-------------------------------------------------------
-          ///mision vision ----------------------------
-          
-          //---------------------
-        }
-        }
-        const quienesScroll = document.addEventListener("scroll",scrollFun)
-
-        //tarjeta de quienes somos animacion ------------------------
-        var controller = new ScrollMagic.Controller();
-        const t2 = new TimelineMax({ 
-          onUpdate: (e,s)=>{
-            if(interval){
-              clearInterval(interval);
-            }
-            const time = 0.2
-            var count = 1
-            for (let times = 0; times <= 1; times=times+time) {
-              if(times < t2.progress() && t2.progress() < times+time){
-                setactualBombillo(bombillos[count])
-              }
-              count ++
-            }
-       
-        },
-        onComplete:()=>{
-          function wait(ms)
-          {
-              var d = new Date();
-              var d2 = new Date();
-              do { d2 = new Date(); }
-              while(d2-d < ms);
-          }
-          // interval = setInterval(()=>{
-
-            // for (let k = 1; k < bombillos.length; k++) {
-            //   console.time("test")
-            //   console.log("seteando",k)
-            //   wait(2000)
-            //   setactualBombillo(bombillos[k])
-            //   console.timeEnd("test")
-            // }
-
-          // },1000)
-
-        }
-        })
-        var tween = t2.fromTo(".quienesSomos", 1, {left: width*1.2}, {left: width/2});
-        var scene = new ScrollMagic.Scene({triggerElement: "#quienes2", offset:50,duration: 500})
-            .setTween(tween)
-            // .addIndicators({name: "staggering"}) // add indicators (requires plugin)
-            .addTo(controller);
-        //----------------------------------------------------------
-        ///mision vision ----------------------------
-        var misionControl = new ScrollMagic.Controller();
-        var scene = new ScrollMagic.Scene({triggerElement: "#izqMision", duration: height*0.8,offset:height*0.8*0.5})        
-        .setPin("#izqMision")
-        .addIndicators({name: "1 (duration: 300)"}) // add indicators (requires plugin)
-        .addTo(controller);     
-        for (let k = 0; k < bombillos.length; k++) {
-          setTimeout(()=>{
-            setactualBombillo(bombillos[k])
-          },1000)
-          
-        }   
-        //---------------------
-      }
-    },[start])
+      const vh = window.innerHeight;
+      var controller = new ScrollMagic.Controller();
+      new ScrollMagic.Scene({triggerElement: "#quienes2", duration:2*vh,triggerHook:0})
+      .setPin(".der")
+      .addTo(controller);
+    },[])
 
     const circles = ()=>{
       var tamano = "1020"
@@ -175,18 +94,28 @@ const Quienes= (props)=>{
       </>
       )
     }
- /// TODO:
-//inicio imagenes de abajo hacia arriba
-//  targeta hacia la izquierda con scroll 
-//  trayecto puntos aparecen cuando toquen aparece a abajo hacia arraba
-//   circulos se juntan y  quedan como el fondo de las fotos automatizacion
-//  proyectos y servicios aparte
-//servicios en scrollhorizonatal
-// cambiar nombre de servicios a portafolio
-// cambiar de proyecto a portafolio
-//en proyecto poner de fondo videos
-//inicio poner imagenes en transicion 
-
+    const animationClose = ()=>{
+        const t2 = new TimelineMax({
+          onComplete:()=>{
+            setanimated(true)
+          }
+         })
+        t2.to("#transicion",1,{left:"0",ease:Power4.easeInOut},"textIn")
+        .to("#transicion h1",1,{left:"50%",ease:Power4.easeInOut},"textIn").play()
+  
+      }
+    const exitAnim=()=>{
+      setfinish(true)
+    }
+    useEffect(()=>{
+      if(animated && finish){
+        const t2 = new TimelineMax({})
+        t2.to("#transicion",1,{left:"-100%",ease:Power4.easeInOut},"textOut")
+        .to("#transicion h1",1,{left:"150%",ease:Power4.easeInOut},"textOut").play()
+        setanimated(false)
+        setfinish(false)
+      }
+    },[animated,finish])
 const circle= ()=>{
   return(
     <>
@@ -209,30 +138,29 @@ const circle= ()=>{
       <div id="inicio" >
         <div className="container">
           <div className="inicio">
+            <div className="decoration"/>
             <div className="image">
-                  <div className="box red" id="box1">1</div>
-                  <div className="box green" id="box2">2</div>
-                  <div className="box blue" id="box3"/>
-                <div  className="gradient"/>
+                  <Img fixed={data.inicio.childImageSharp.fixed} 
+                        objectFit="cover"
+                        objectPosition="50% 50%"
+                  />
             </div>
             <div className='oculto1' />
             <div className="containerCircle">
             <div  id="descriptionInicio" className="descriptionInicio">
-                  Loremipsumdolorsitamet,consectetueradipiscingelit.Aeneancommodo
-                  ligulaegetdolor.Aeneanmassa.Cumsociisnatoquepenatibusetmagnisdis
-                  parturientmontes,nasceturridiculusmus.Donecquamfelis,ultriciesnec,
-                  pellentesqueeu,pretiumquis,sem.Nullaconsequatmassaquisenim.Donec
-                  pedejusto,fringillavel,aliquetnec,vulputateeget,arcu.Inenimjusto,rhoncus
+            INGENIERÍA Y DESARROLLO ENERGÉTICO APLICADO SAS es una empresa enfocada en el desarrollo de implementación 
+            de nuevas tecnologías en diferentes áreas del mercado nacional.
+            Buscamos ofrecer servicios y productos que satisfagan las necesidades
+            de nuestros clientes, a través de puntualidad, compromiso y alta calidad.
                 </div>
               <div className="circle">
 
 
                 <div  id="descriptionInicioF" className="descriptionInicio">
-                  Loremipsumdolorsitamet,consectetueradipiscingelit.Aeneancommodo
-                  ligulaegetdolor.Aeneanmassa.Cumsociisnatoquepenatibusetmagnisdis
-                  parturientmontes,nasceturridiculusmus.Donecquamfelis,ultriciesnec,
-                  pellentesqueeu,pretiumquis,sem.Nullaconsequatmassaquisenim.Donec
-                  pedejusto,fringillavel,aliquetnec,vulputateeget,arcu.Inenimjusto,rhoncus
+                INGENIERÍA Y DESARROLLO ENERGÉTICO APLICADO SAS es una empresa enfocada en el desarrollo de implementación 
+                de nuevas tecnologías en diferentes áreas del mercado nacional.
+                Buscamos ofrecer servicios y productos que satisfagan las necesidades
+                de nuestros clientes, a través de puntualidad, compromiso y alta calidad.
                 </div>
               </div>
             </div>
@@ -243,97 +171,67 @@ const circle= ()=>{
       </div>
 
       <div id="quienes" className="quienes">
-        <div className="container">
           <div id="quienes2" className="quienes2">
-            <div className="quienesSomos">
-              <div className="title">
-                <h1>
-                  <svg>
-                    <circle cx="20" cy="20" r="20" />
-                  </svg>
-                  Quienes Somos
-                </h1>
-              </div>
-              <div className="separador">
-                <div className="imagen">
-                  <div className="image">
-                    <img src={actualBombillo} />
-                  </div>
-                </div>
-                <div className="text">
-                  Loremipsumdolorsitamet,consectetuer
-                  adipiscingelit.Aeneancommodoligulaegetdolor.
-                  Aeneanmassa.Cumsociisnatoquepenatibuset
-                  magnisdisparturientmontes,nasceturridiculus
-                  mus.Donecquamfelis,ultriciesnec,pellentesque
-                  eu,pretiumquis,sem.Nullaconsequatmassaqu
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="misionVision">
-            <div className="izq" id="izqMision">
-            <div className="arriba" id="mision">
-              <img src={require("../images/mision.jpg")}/>
-              </div>
-              <div className="abajo">
-                <img src={require("../images/vision.jpg")}/>
-              </div>
-            </div>
-            <div className="der">
-              <div className="arriba">
+              <div className="izq">
+              <img src="../ideaBlanco.png"/>
+              <p className="quienes">
+                Entre nuestros servicios encontramos
+                el diseño de sistemas de generación 
+                de energía renovables, automatización 
+                y mantenimiento de procesos industriales, 
+                diseño de sistemas ergonómicos, fabricación 
+                de basculas camioneras y desarrollo de software.
 
-                <p>
-                 <h1>Misión</h1>
-                  Loremipsumdolorsitamet,consectetueradipiscing
-                  elit.Aeneancommodoligulaegetdolor.Aenean
-                  massa.Cumsociisnatoquepenatibusetmagnisdis
-                  parturientmontes,nasceturridiculusmus.Donec
-                </p>
+              </p>
+              <p className="mision">
+              <h1>Misión</h1>
+                Loremipsumdolorsitamet,consectetueradipiscing
+                elit.Aeneancommodoligulaegetdolor.Aenean
+                massa.Cumsociisnatoquepenatibusetmagnisdis
+                parturientmontes,nasceturridiculusmus.Donec
+              </p>
+              
+              <p className="vision">
+              <h1>Visión</h1>
+                Loremipsumdolorsitamet,consectetueradipiscing
+                elit.Aeneancommodoligulaegetdolor.Aenean
+                massa.Cumsociisnatoquepenatibusetmagnisdis
+                parturientmontes,nasceturridiculusmus.Donec
+              </p>
+                            
+              <p className="porque">
+              <h1>Por qué elegirnos</h1>
+                  Porque somos un equipo de profesionales 
+                  que trabajamos empeñados en asegurar el 
+                  éxito de nuestros clientes aseguramos el
+                  cumplimiento de los plazos establecidos,
+                  nos involucramos al 100% en cada proyecto
+                  y trabajamos con transparencia, eficiencia y empatía.
+              </p>
               </div>
-              <div className="arriba">
-                <p>
-                  <h1>Visión</h1>
-                  Loremipsumdolorsitamet,consectetueradipiscing
-                  elit.Aeneancommodoligulaegetdolor.Aenean
-                  massa.Cumsociisnatoquepenatibusetmagnisdis
-                  parturientmontes,nasceturridiculusmus.Donec
-                </p>
+              <div className="der">
+                <div className="decoracion">
+                    <h1>
+                      Quiénes somos
+                    </h1>
+                  </div>
+                <img src="../quienesSomos.jpg"/>
               </div>
-            </div>
           </div>
-          <div className="aspiracion">
-            <div className="circles">
-              {circles()}
-            </div>
-            <div className="izq">
-              <div className="circle">
-                <svg>
-                  <circle cx="177" cy="177" r="177" />
-                </svg>
-                <h1>Aspiración</h1>
-                <p>
-                  Loremipsumdolorsitamet,consectetueradipiscing
-                  elit.Aeneancommodoligulaegetdolor.Aenean
-                  massa.Cumsociisnatoquepenatibusetmagnisdis
-                  parturientmontes,nasceturridiculusmus.Donec
-                </p>
+          <div id="portafolioHome">
+              <div className="izq">
+                  <img src="../porque.jpg"/>
               </div>
-            </div>
-            <div className="der">
-              <div className="circle">
-                <svg>
-                  <circle cx="177" cy="177" r="177" />
-                </svg>
-                <h1>Trayectoria</h1>
-                <p>
-                  Loremipsumdolorsitamet,consectetueradipiscing
-                  elit.Aeneancommodoligulaegetdolor.Aenean
-                  massa.Cumsociisnatoquepenatibusetmagnisdis
-                  parturientmontes,nasceturridiculusmus.Donec
-                </p>
+              <div className="der">
+                <div className="portafolio">
+                <h1>Portafolio</h1>
+                <TransitionLink className="flecha" to="/portafolio" onClick={()=>setto("Portafolio")}
+                  exit={{trigger:()=>exitAnim()}} entry={{trigger: () => animationClose()}}>
+                 Te invitamos a conocer nuestro portafolio de servicios
+                 <FontAwesomeIcon icon={faLongArrowAltRight} />
+                </TransitionLink>
+                </div>
               </div>
-            </div>
           </div>
           <div className="proyecto">
             <div className="card">
@@ -366,7 +264,6 @@ const circle= ()=>{
             {circle()}
             {circle()}
             {circle()}
-          </div>
         </div>
       </div>
 

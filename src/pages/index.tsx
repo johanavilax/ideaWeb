@@ -6,7 +6,7 @@ import Start from "../components/start"
 import Portafolio from "./portafolio"
 import Servicios from "./servicios"
 import Layout from "../components/layout"
-const Index = () => {
+const Index = (props) => {
   const [start,setstart]=useState(false)
   return(
 <> 

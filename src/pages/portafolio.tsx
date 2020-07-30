@@ -7,7 +7,7 @@ import {FullpageSection } from '@ap.cx/react-fullpage'
 import Layout from "../components/layout"
 //ScrollMagic
 import * as ScrollMagic from "scrollmagic";
-import "scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators"
+// import "scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators"
 // //Gsap
 import {CSSPlugin, Power4, Linear} from 'gsap/all'
 import gsap , { TimelineMax, TweenMax, TweenLite,Back } from "gsap";
@@ -70,38 +70,6 @@ const Portafolio = () => {
       tl.from(sections[i], 1, { x: "100%", ease: Linear.easeNone }, "+=1");
     }
     
-bodyAnim.to("body", 1, { backgroundColor: "orange" });
-bodyAnim.to("body", 1, { backgroundColor: "red" });
-bodyAnim.to("body", 1, { backgroundColor: "green" });
-bodyAnim.to("body", 1, { backgroundColor: "navy" });
-bodyAnim.to("body", 1, { backgroundColor: "purple" });
-    new ScrollMagic.Scene({
-      triggerElement: "#portafolioShow",
-      triggerHook: "onLeave",
-      duration: "200%"
-    })   .setPin("#portafolioShow")
-    .setTween(tl)
-    .addIndicators({
-      colorTrigger: "red",
-      colorStart: "red",
-      colorEnd: "red",
-      indent: 40
-    })
-    .addTo(controller); 
-    new ScrollMagic.Scene({
-      triggerElement: "#portafolioShow",
-      triggerHook: "onLeave",
-      duration: "500%"
-    })
-    
-      .setTween(bodyAnim)
-      .addIndicators({
-        colorTrigger: "blue",
-        colorStart: "blue",
-        colorEnd: "blue",
-        indent: 80
-      })
-      .addTo(controller);
   }),[]
   return (
     <>
