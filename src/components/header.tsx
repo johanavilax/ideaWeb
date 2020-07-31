@@ -145,7 +145,7 @@ const Header = (props) => {
 
                 <TransitionLink id="quienesLink" to="/" onClick={()=>setto("Quiénes somos")}
                   exit={{trigger:()=>exitAnim()}} entry={{trigger: () => animationClose()}}>
-                  <div className="bg quienes" />
+                  <img src="../quienes.jpg" className="bg quienes" />
                   <div className="black" />
                   <h1>
                      ¿ Quiénes somos ? 
@@ -159,7 +159,7 @@ const Header = (props) => {
 
                 <TransitionLink id="serviciosLink" to="/portafolio" onClick={()=>setto("Portafolio")}
                   exit={{trigger:()=>exitAnim()}} entry={{trigger: () => animationClose()}}>
-                  <div className="bg servicios" />
+                  <img src="../portafolio.jpg" className="bg servicios" />
                   <div className="black" />
                   <h1>
                     Portafolio 
@@ -171,7 +171,7 @@ const Header = (props) => {
               <li>
                 <TransitionLink id="portafolioLink" to="/proyectos" onClick={()=>setto("Proyectos")}
                   exit={{trigger:()=>exitAnim()}} entry={{trigger: () => animationClose()}}>
-                  <div className="bg portafolio" />
+                  <img src="../proyectos.jpg" className="bg portafolio" />
                   <div className="black" />
                   <h1>
                     Proyectos
