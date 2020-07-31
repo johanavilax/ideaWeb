@@ -185,22 +185,23 @@ const circle= ()=>{
               </p>
               <p className="mision">
               <h1>Misión</h1>
-              Entre nuestros servicios encontramos
-              el diseño de sistemas de generación 
-              de energía renovables, automatización 
-              y mantenimiento de procesos industriales, 
-              diseño de sistemas ergonómicos, fabricación 
-              de basculas camioneras y desarrollo de software.
+              Brindar soluciones profesionales dirigidas a sectores del 
+              mercado industrial, mediante estrategias innovadoras  y 
+              conocimientos de ingeniería enfocados en automatización, 
+              diseño, mantenimiento, ergonomía Industrial, área de basculas
+               camioneras y demás sistemas de pesaje en basculas, ergonomía industrial
+                y manipulación de toda la línea de energías renovables.   Direccionando
+                 e identificando las necesidades de nuestros clientes, con los más altos 
+                 estándares de calidad, compromiso, puntualidad  y respeto.
               </p>
               
               <p className="vision">
               <h1>Visión</h1>
-              Entre nuestros servicios encontramos
-              el diseño de sistemas de generación 
-              de energía renovables, automatización 
-              y mantenimiento de procesos industriales, 
-              diseño de sistemas ergonómicos, fabricación 
-              de basculas camioneras y desarrollo de software.
+              Posesionarnos como  líderes en el sector de industrial para 
+              los próximos 5 años con fuerte proyección internacional,
+               basados en principios cooperativos sólidos, a través de
+                soluciones  innovadoras que contribuyan al posicionamiento 
+                de la empresa, reconocimiento a favor de nuestro objeto social.
               </p>
                             
               <p className="porque">
