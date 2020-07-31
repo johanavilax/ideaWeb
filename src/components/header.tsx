@@ -56,9 +56,9 @@ const Header = (props) => {
             }else{
               logo.style.opacity = ("0")
             }
-            if(positionTop > 1.9*vh && positionTop <5*vh){
+            if(positionTop > 1.9*vh && positionTop <6*vh){
               setactualLogo("../ideaBlanco.png")
-            }else if(positionTop < 1.9*vh || positionTop >5*vh){
+            }else if(positionTop < 1.9*vh || positionTop >6*vh){
               setactualLogo("../idea.png")
             }
         });
@@ -157,24 +157,24 @@ const Header = (props) => {
               </li>
               <li className="bordes">
 
-                <TransitionLink id="serviciosLink" to="/servicios" onClick={()=>setto("Servicios")}
+                <TransitionLink id="serviciosLink" to="/portafolio" onClick={()=>setto("Portafolio")}
                   exit={{trigger:()=>exitAnim()}} entry={{trigger: () => animationClose()}}>
                   <div className="bg servicios" />
                   <div className="black" />
                   <h1>
-                    Servicios
+                    Portafolio 
                     <div className="subrayado" />
                   </h1>
                 </TransitionLink>
 
               </li>
               <li>
-                <TransitionLink id="portafolioLink" to="/portafolio" onClick={()=>setto("Portafolio")}
+                <TransitionLink id="portafolioLink" to="/proyectos" onClick={()=>setto("Proyectos")}
                   exit={{trigger:()=>exitAnim()}} entry={{trigger: () => animationClose()}}>
                   <div className="bg portafolio" />
                   <div className="black" />
                   <h1>
-                    Portafolio
+                    Proyectos
                     <div className="subrayado" />
                   </h1>
                 </TransitionLink>

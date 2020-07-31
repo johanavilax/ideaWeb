@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "../components/header"
+import Footer from "../components/footer"
 import "../styles/styles.scss"
 // import  'animation.gsap'
 
@@ -33,6 +34,7 @@ export default  (props) => {
           <div >
             <main>{children}</main>
           </div>
+        <Footer/>
       </TransitionContext.Provider>
 
       </div>

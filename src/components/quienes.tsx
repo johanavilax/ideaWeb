@@ -79,7 +79,7 @@ const Quienes= (props)=>{
     useEffect(()=>{
       const vh = window.innerHeight;
       var controller = new ScrollMagic.Controller();
-      new ScrollMagic.Scene({triggerElement: "#quienes2", duration:2*vh,triggerHook:0})
+      new ScrollMagic.Scene({triggerElement: "#quienes2", duration:2.5*vh,triggerHook:0})
       .setPin(".der")
       .addTo(controller);
     },[])
@@ -185,18 +185,22 @@ const circle= ()=>{
               </p>
               <p className="mision">
               <h1>Misión</h1>
-                Loremipsumdolorsitamet,consectetueradipiscing
-                elit.Aeneancommodoligulaegetdolor.Aenean
-                massa.Cumsociisnatoquepenatibusetmagnisdis
-                parturientmontes,nasceturridiculusmus.Donec
+              Entre nuestros servicios encontramos
+              el diseño de sistemas de generación 
+              de energía renovables, automatización 
+              y mantenimiento de procesos industriales, 
+              diseño de sistemas ergonómicos, fabricación 
+              de basculas camioneras y desarrollo de software.
               </p>
               
               <p className="vision">
               <h1>Visión</h1>
-                Loremipsumdolorsitamet,consectetueradipiscing
-                elit.Aeneancommodoligulaegetdolor.Aenean
-                massa.Cumsociisnatoquepenatibusetmagnisdis
-                parturientmontes,nasceturridiculusmus.Donec
+              Entre nuestros servicios encontramos
+              el diseño de sistemas de generación 
+              de energía renovables, automatización 
+              y mantenimiento de procesos industriales, 
+              diseño de sistemas ergonómicos, fabricación 
+              de basculas camioneras y desarrollo de software.
               </p>
                             
               <p className="porque">
@@ -208,6 +212,20 @@ const circle= ()=>{
                   nos involucramos al 100% en cada proyecto
                   y trabajamos con transparencia, eficiencia y empatía.
               </p>
+              <div className="confian">
+              <h1>Ellos confian en nosotros</h1>
+                    <div className="arriba">
+                      <img className="imagenes" src="../company.svg" alt=""/>
+                      <img className="imagenes" src="../company.svg" alt=""/>
+                      <img className="imagenes" src="../company.svg" alt=""/>
+                    </div>
+                    <div className="abajo">
+                      <img className="imagenes" src="../company.svg" alt=""/>
+                      <img className="imagenes" src="../company.svg" alt=""/>
+                      <img className="imagenes" src="../company.svg" alt=""/>
+                    </div>
+              </div>
+
               </div>
               <div className="der">
                 <div className="decoracion">
@@ -224,46 +242,41 @@ const circle= ()=>{
               </div>
               <div className="der">
                 <div className="portafolio">
-                <h1>Portafolio</h1>
-                <TransitionLink className="flecha" to="/portafolio" onClick={()=>setto("Portafolio")}
+                <h1>Proyectos</h1>
+                <TransitionLink className="flecha" to="/proyectos" onClick={()=>setto("Proyectos")}
                   exit={{trigger:()=>exitAnim()}} entry={{trigger: () => animationClose()}}>
-                 Te invitamos a conocer nuestro portafolio de servicios
+                 Te invitamos a conocer nuestros proyectos realizados.
                  <FontAwesomeIcon icon={faLongArrowAltRight} />
                 </TransitionLink>
                 </div>
               </div>
           </div>
-          <div className="proyecto">
-            <div className="card">
-              <div className="title">
-                <h1>
-                  <svg>
-                    <circle cx="20" cy="20" r="20" />
-                  </svg>
-                  Proyectos
-                </h1>
-              </div>
-              <div className="separador">
-                <div className="imagen">
-                  <div className="image">
-                    <Img fluid={data.proyecto.childImageSharp.fluid} />
-                  </div>
-                </div>
-                <div className="text">
-                  Loremipsumdolorsitamet,consectetuer
-                  adipiscingelit.Aeneancommodoligulaegetdolor.
-                  Aeneanmassa.Cumsociisnatoquepenatibuset
-                  magnisdisparturientmontes,nasceturridiculus
-                  mus.Donecquamfelis,ultriciesnec,pellentesque
-                  eu,pretiumquis,sem.Nullaconsequatmassaqu
-                </div>
-              </div>
+          <div id="serviciosHome">
+            <h1>Somos expertos en estas áreas de ingeníeria</h1>
+            <div className="alinear">
+              <TransitionLink className="flecha" to="/portafolio" onClick={()=>setto("Portafolio")}
+                    exit={{trigger:()=>exitAnim()}} entry={{trigger: () => animationClose()}}>
+                  <p>Conoce más</p>
+                  <FontAwesomeIcon icon={faLongArrowAltRight} />
+                  </TransitionLink>
             </div>
-          </div>
-          <div className="proyectos">
-            {circle()}
-            {circle()}
-            {circle()}
+
+              <div className="tarjeta uno">
+                <div className="iconos"><img src="../automatizacion.svg"/></div>
+                <div className="titulo">Automatización industrial</div>
+              </div>
+              <div className="tarjeta dos">
+                <div className="iconos"><img src="../software.svg" /></div>
+                <div className="titulo">Desarrollo de software</div>
+              </div>
+              <div className="tarjeta tres">
+                <div className="iconos"><img src="../ambiental.svg" /></div>
+                <div className="titulo">Energias renovables</div>
+              </div>
+              <div className="tarjeta cuatro">
+                <div className="iconos"><img src="../industrial.svg" /></div>
+                <div className="titulo">Diseño industrial</div>
+              </div>
         </div>
       </div>
 
