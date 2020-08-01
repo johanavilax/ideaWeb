@@ -4,7 +4,7 @@ import Img from "gatsby-image"
 
 //ScrollMagic
 import * as ScrollMagic from "scrollmagic";
-import "scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators"
+// import "scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators"
 // //Gsap
 import {CSSPlugin, Power4, Linear} from 'gsap/all'
 import gsap , { TimelineMax, TweenMax, TweenLite,Back } from "gsap";
