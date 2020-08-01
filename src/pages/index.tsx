@@ -1,7 +1,7 @@
 import React, {useState,useRef} from "react"
-import "../styles/styles.scss"
 import Quienes from "../components/quienes"
 import Start from "../components/start"
+import Footer from "../components/footer"
 const Index = (props) => {
   const [start,setstart]=useState(false)
   return(
@@ -9,7 +9,7 @@ const Index = (props) => {
 
       <Start setstart={setstart}/>
       <Quienes start={start}/>
-
+      <Footer/>
 
 
 

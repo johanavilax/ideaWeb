@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 import {FullpageSection } from '@ap.cx/react-fullpage'
 import Layout from "../components/layout"
+import Footer from "../components/footer"
 const Servicios= ()=>{
     const data = useStaticQuery(graphql `
     query {
@@ -27,7 +28,7 @@ const Servicios= ()=>{
       )
     }
     return(
-
+        <>
         <div id="servicios" className="servicios">
           <div className="container">
             <div className="servicio1">
@@ -105,8 +106,8 @@ const Servicios= ()=>{
             </div>
           </div>
         </div>
-
-
+      <Footer/>
+      </>
     )
 }
 

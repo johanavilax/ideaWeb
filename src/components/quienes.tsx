@@ -60,7 +60,7 @@ const Quienes= (props)=>{
       }
       quienes: file(relativePath: { eq: "varias(5).jpg" }) {
         childImageSharp {
-          fixed(width: 3000) {
+          fixed(width: 2000) {
             ...GatsbyImageSharpFixed
           }
         }
@@ -79,7 +79,7 @@ const Quienes= (props)=>{
     useEffect(()=>{
       const vh = window.innerHeight;
       var controller = new ScrollMagic.Controller();
-      new ScrollMagic.Scene({triggerElement: "#quienes2", duration:2.5*vh,triggerHook:0})
+      new ScrollMagic.Scene({triggerElement: "#quienes2", duration:2.7*vh,triggerHook:0})
       .setPin(".der")
       .addTo(controller);
     },[])

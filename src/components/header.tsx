@@ -46,21 +46,29 @@ const Header = (props) => {
 
   const[actualLogo,setactualLogo] = useState("../idea.png")
     useEffect(() => {
+
       const vh = window.innerHeight;
       const logo = document.querySelectorAll('#logo .logo')[0];
         window.addEventListener('scroll',function (e) {
-
+          console.log(window.location.pathname)
+          if(window.location.pathname === "/"){
             let positionTop = document.querySelector('body').getBoundingClientRect().top*-1
             if (positionTop > 0.9*vh) {
                 logo.style.opacity = ("1")
             }else{
               logo.style.opacity = ("0")
             }
-            if(positionTop > 1.9*vh && positionTop <6*vh){
+          
+              if(positionTop > 1.9*vh && positionTop <6*vh){
+                setactualLogo("../ideaBlanco.png")
+              }else if(positionTop < 1.9*vh || positionTop >6*vh){
+                setactualLogo("../idea.png")
+              }
+            }else if(window.location.pathname === "/portafolio/"){
+              logo.style.opacity = ("1")
               setactualLogo("../ideaBlanco.png")
-            }else if(positionTop < 1.9*vh || positionTop >6*vh){
-              setactualLogo("../idea.png")
             }
+           
         });
       const menu = document.getElementById("menu-toggle")
       var logoVisible = true;
@@ -143,12 +151,12 @@ const Header = (props) => {
             <div className="ul hidden">
               <li>
 
-                <TransitionLink id="quienesLink" to="/" onClick={()=>setto("Quiénes somos")}
+                <TransitionLink id="quienesLink" to="/" onClick={()=>setto("Inicio")}
                   exit={{trigger:()=>exitAnim()}} entry={{trigger: () => animationClose()}}>
                   <img src="../quienes.jpg" className="bg quienes" />
                   <div className="black" />
                   <h1>
-                     ¿ Quiénes somos ? 
+                     Inicio
                     <div className="subrayado" />
                   </h1>
 
@@ -168,7 +176,7 @@ const Header = (props) => {
                 </TransitionLink>
 
               </li>
-              <li>
+              <li className="bordes">
                 <TransitionLink id="portafolioLink" to="/proyectos" onClick={()=>setto("Proyectos")}
                   exit={{trigger:()=>exitAnim()}} entry={{trigger: () => animationClose()}}>
                   <img src="../proyectos.jpg" className="bg portafolio" />
@@ -180,7 +188,20 @@ const Header = (props) => {
                 </TransitionLink>
 
               </li>
+              <li>
 
+                <TransitionLink id="contactoLink" to="/Contacto" onClick={()=>setto("Contacto")}
+                  exit={{trigger:()=>exitAnim()}} entry={{trigger: () => animationClose()}}>
+                  <img src="../quienes.jpg" className="bg quienes" />
+                  <div className="black" />
+                  <h1>
+                      Contacto
+                    <div className="subrayado" />
+                  </h1>
+
+                </TransitionLink>
+
+                </li>
             </div>
           </nav>
         </div>

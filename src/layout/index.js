@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "../components/header"
-import Footer from "../components/footer"
+
 import "../styles/styles.scss"
 // import  'animation.gsap'
 
@@ -15,15 +15,11 @@ export default  (props) => {
   const [animated, setanimated] = useState(false)
   const [finish,setfinish]  = useState(false)
   const [to,setto] = useState("test")
-
+  const [footer,setfooter] = useState(true)
 
   useEffect(()=>{
-    const body = document.getElementsByTagName("BODY")[0]
-    body.addEventListener("onwheel" in document ? "wheel" : "mousewheel", function(e) {
-      console.log(e.deltaY,"normal")
-      const delta = Math.sign(e.deltaY);
-      console.info(delta);
-    })
+
+    
   },[])
 
   return (
@@ -34,7 +30,7 @@ export default  (props) => {
           <div >
             <main>{children}</main>
           </div>
-        <Footer/>
+
       </TransitionContext.Provider>
 
       </div>

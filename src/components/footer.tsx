@@ -24,44 +24,48 @@ const Footer = (props) => {
     }
     return (
         <>
-        <div id="footer">
-            <div className="decoracion"/>
-            <TransitionLink className="flecha" to="/proyectos" onClick={()=>setto("Contacto")}
-                  exit={{trigger:()=>exitAnim()}} entry={{trigger: () => animationClose()}}>
-                 <p>Contactanos</p>
-                 <FontAwesomeIcon icon={faLongArrowAltRight} />
-                </TransitionLink>
-                <ul>
-                    <div>
-                        <li>
-                            <a>
-                                <FontAwesomeIcon icon={faFacebookF} />
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <FontAwesomeIcon icon={faInstagram} />
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <FontAwesomeIcon icon={faLinkedinIn} />
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <FontAwesomeIcon icon={faWhatsapp} />
-                            </a>
-                        </li>
+            <footer>
+                <div id="footer">
+                    <div className="decoracion" />
+                    <TransitionLink className="flecha" to="/proyectos" onClick={()=>setto("Contacto")}
+                        exit={{trigger:()=>exitAnim()}} entry={{trigger: () => animationClose()}}>
+                        <p>Contactanos</p>
+                        <FontAwesomeIcon icon={faLongArrowAltRight} />
+                    </TransitionLink>
+                    <ul>
+                        <div>
+                            <li>
+                                <a>
+                                    <FontAwesomeIcon icon={faFacebookF} />
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <FontAwesomeIcon icon={faInstagram} />
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <FontAwesomeIcon icon={faLinkedinIn} />
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <FontAwesomeIcon icon={faWhatsapp} />
+                                </a>
+                            </li>
+                        </div>
+                    </ul>
+                    <div className="datos">
+                        <p>+57 305 766 6868 - Cra 6 # 19-18 Funza Cundinamarca</p>
                     </div>
-                </ul>
-            <div className="datos">
-                <p>+57 305 766 6868 - Cra 6 # 19-18 Funza Cundinamarca</p>
-            </div>
-            <div className="derechos">
-                <p>Todos los derechos reservados ©️ Powered by <a target="blank" href="https://aidea.com.co">AIDEA S.A.S</a></p>
-            </div>
-        </div>
+                    <div className="derechos">
+                        <p>Todos los derechos reservados ©️ Powered by <a target="blank"
+                                href="https://aidea.com.co">AIDEA S.A.S</a></p>
+                    </div>
+                </div>
+            </footer>
+
         </>
     )
 }
