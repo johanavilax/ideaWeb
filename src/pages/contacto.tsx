@@ -12,7 +12,7 @@ const Contacto = (props) => {
 
       </div>
       <div className="mapa">
-
+      
       </div>
     </div>
   </div>

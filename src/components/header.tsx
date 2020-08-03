@@ -183,7 +183,7 @@ const Header = (props) => {
                 </TransitionLink>
               </li>
               <li>
-                <TransitionLink id="contactoLink" to="/Contacto" onClick={()=>setto("Contacto")}
+                <TransitionLink id="contactoLink" to="/contacto" onClick={()=>setto("Contacto")}
                   exit={{trigger:()=>exitAnim()}} entry={{trigger: () => animationClose()}}>
                   <img src="../quienes.jpg" className="bg quienes" />
                   <div className="black" />
