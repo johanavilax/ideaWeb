@@ -783,7 +783,7 @@ body {
     overflow: hidden;
     .servicios{
         height: 100vh;
-        width: 250vw;
+        width: auto;
         display: flex;
         flex-direction: row;
         position: absolute;
@@ -818,7 +818,7 @@ body {
                 -webkit-transition-duration: 0.3s;
                 transition-duration: 0.3s;
                 height: 100vh;
-                width: (100vw/3);
+                width: 100%;
                 object-fit: cover;
                 z-index: 10;
             }
@@ -846,6 +846,15 @@ body {
     font-size:4vw;
 }
 //servicios 
+
+.serviciosContainer{
+    height: 100vh;
+    img{
+        height: 100vh;
+        width: 100vw;
+        object-fit: cover;
+    }
+}
 
 #servicios {
     border: solid 2px green;
