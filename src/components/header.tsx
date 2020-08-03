@@ -150,7 +150,6 @@ const Header = (props) => {
           <nav>
             <div className="ul hidden">
               <li>
-
                 <TransitionLink id="quienesLink" to="/" onClick={()=>setto("Inicio")}
                   exit={{trigger:()=>exitAnim()}} entry={{trigger: () => animationClose()}}>
                   <img src="../quienes.jpg" className="bg quienes" />
@@ -159,12 +158,9 @@ const Header = (props) => {
                      Inicio
                     <div className="subrayado" />
                   </h1>
-
                 </TransitionLink>
-
               </li>
               <li className="bordes">
-
                 <TransitionLink id="serviciosLink" to="/portafolio" onClick={()=>setto("Portafolio")}
                   exit={{trigger:()=>exitAnim()}} entry={{trigger: () => animationClose()}}>
                   <img src="../portafolio.jpg" className="bg servicios" />
@@ -174,7 +170,6 @@ const Header = (props) => {
                     <div className="subrayado" />
                   </h1>
                 </TransitionLink>
-
               </li>
               <li className="bordes">
                 <TransitionLink id="portafolioLink" to="/proyectos" onClick={()=>setto("Proyectos")}
@@ -186,10 +181,8 @@ const Header = (props) => {
                     <div className="subrayado" />
                   </h1>
                 </TransitionLink>
-
               </li>
               <li>
-
                 <TransitionLink id="contactoLink" to="/Contacto" onClick={()=>setto("Contacto")}
                   exit={{trigger:()=>exitAnim()}} entry={{trigger: () => animationClose()}}>
                   <img src="../quienes.jpg" className="bg quienes" />
@@ -198,37 +191,11 @@ const Header = (props) => {
                       Contacto
                     <div className="subrayado" />
                   </h1>
-
                 </TransitionLink>
-
                 </li>
             </div>
           </nav>
         </div>
-        {/* <div className="container">
-          <div className="innerHeader">
-            <div className="logo">
-              <div className="mainImage" id="logo" ref={preloaderRef} />
-            </div>
-            <div className="navigation">
-              <nav>
-                <TransitionLink to="/" exit={{trigger:()=>exitAnim()}}
-                  entry={{trigger: ({ node, e, exit, entry }) => animationClose(node,e,exit,entry),}}>
-                  Quiénes somos
-                </TransitionLink>
-                <TransitionLink to="/servicios" exit={{}}
-                  entry={{trigger: ({ node, e, exit, entry }) => animationClose(node,e,exit,entry),}}>
-                  servicios
-                </TransitionLink>
-                <TransitionLink to="/portafolio" exit={{}}
-                  entry={{trigger: ({ node, e, exit, entry }) => animationClose(node,e,exit,entry),}}>
-                  Portafolio
-                </TransitionLink>
-                <Link smooth={true} to="contacto">Contacto</Link>
-              </nav>
-            </div>
-          </div>
-        </div> */}
       </header>
       <div id="logo">
         <img className="logo" src={actualLogo} />
@@ -238,14 +205,6 @@ const Header = (props) => {
           {to}
         </h1>
       </div>
-      {/* <div className="circles">
-        <div className="containCircles">
-          <h1 id="actualNav">{actualPosition}</h1>
-          <img id="circulo1" src={circulo} />
-          <img id="circulo2" src={circulo} />
-          <div id="transicion" />
-        </div>
-      </div> */}
     </>
   )
 

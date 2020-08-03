@@ -1,20 +1,24 @@
 import React, {useState,useRef} from "react"
-import Quienes from "../components/quienes"
-import Start from "../components/start"
-import Footer from "../components/footer"
-const Index = (props) => {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFacebookF,faInstagram,faWhatsapp,faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
+import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
+const Contacto = (props) => {
   const [start,setstart]=useState(false)
   return(
 <> 
+  <div id="contacto">
+    <div className="mainContacto">
+      <div className="informacion">
 
-      <Start setstart={setstart}/>
-      <Quienes start={start}/>
-      <Footer/>
+      </div>
+      <div className="mapa">
 
-
+      </div>
+    </div>
+  </div>
 
 
 </>
 )}
 
-export default Index
+export default Contacto

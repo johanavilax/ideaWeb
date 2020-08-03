@@ -33,10 +33,11 @@ const Portafolio = () => {
   },[])
   const animationClose = (toPage:String) => {
 
-    const tl = new TimelineMax().to("#"+toPage+"Servicios",{width:"100vw"}).play();
+    const tl = new TimelineMax().to("#"+toPage+"Page black",{width:"100vw"}).play();
   }
   const exitAnim = (toPage:String)=>{
-    const tl = new TimelineMax().to("#automatizacionServicios",1,{width:"100vw"},"anim").play();
+    const tl = new TimelineMax().to("#"+toPage+"Servicios",1,{width:"100vw"},"anim")
+                                .to("#"+toPage+"Servicios h1",{fontSize:"7vw"},"anim").play();
 
   }
   return (
@@ -45,28 +46,7 @@ const Portafolio = () => {
         <div id="porfolioAnim" className="servicios">
           <TransitionLink id="automatizacionServicios" className="servicio" to="/servicios/automatizacion" 
             exit={{trigger:()=>exitAnim("automatizacion"),length:2}} 
-            entry={{delay: 2,length: 1}}
-            trigger={async pages => {
-              // wait until we have access to both pages
-              const exit = await pages.exit
-              const entry = await pages.entry
-              // here we can access both pages
-              const tl = new TimelineMax(
-                {
-                  onComplete:async ()=>{
-                    console.log("complete")
-                    // await entry.visible
-                  }
-                }
-              ).to("#automatizacionServicios",1,{width:"100vw"},"anim").play();
-              // You could measure the entry element here
-              
-              // start exit animation based on measurements if you want 
-              // wait for the entering page to become visible
-
-              // the entering page is visible here.
-              // if you want you can animate it now!
-          }}
+            entry={{delay: 2,trigger:()=>animationClose("automatizacion")}}
             >
             <div className="black" />
             <img src="../automatizacionP.jpg" />

@@ -11,8 +11,13 @@ const Automatizacion = (props) => {
   <> 
       <div className="serviciosContainer" id="automatizacionPage">
          <img src="../automatizacionP.jpg" />
-
+         {/* <div className="black" /> */}
+         <h1 className="titulo">Automatizacíon industrial</h1>
       </div>
+      <div>
+        
+      </div>
+
 
   </>
   )}
