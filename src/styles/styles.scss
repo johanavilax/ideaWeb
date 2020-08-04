@@ -942,9 +942,15 @@ body {
         background-color: #fff;
         .informacion{
             height: 80vh;
-            width: 50vw;
+            width: 40vw;
+            text-align: left;
+            
         }
-
+        img{
+            height: 80vh;
+            width: 60vw;
+            object-fit: cover;  
+        }
     }
     .mapa{
         height: 20vh;
