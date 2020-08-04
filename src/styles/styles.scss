@@ -522,7 +522,7 @@ body {
 #quienes {
     position: relative;
     background-color: $white;
-    height: 550vh;
+    height: 570vh;
     font-size: 30px;
 
     #quienes2 {
@@ -937,18 +937,19 @@ body {
     width: auto;
     .mainContacto{
         display: flex;
-        height: 100vh;
+        height: 80vh;
         width: auto;
         background-color: #fff;
         .informacion{
-            height: 100vh;
+            height: 80vh;
             width: 50vw;
         }
-        .mapa{
-            height: 100vh;
-            width: 50vw;
-            background: $black;
-        }
+
+    }
+    .mapa{
+        height: 20vh;
+        width: 100vw;
+        background: $black;
     }
 }
 
