@@ -5,13 +5,12 @@ import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
 import Map from "../components/map"
 
 const Contacto = (props) => {
-  const [start,setstart]=useState(false)
   return(
 <> 
   <div id="contacto">
     <div className="mainContacto">
       <div className="informacion">
-        <h1>Contacto</h1>
+        <h1 className="contacto">Contacto</h1>
 
         <h1>Correo electrónico:</h1>
         <p>Gerencia@ideautomation.com.co</p>
@@ -21,10 +20,10 @@ const Contacto = (props) => {
         <h1>Dirección:</h1>
         <p>Cra 6 # 19-18 Funza Cundinamarca</p>
         <h1>Redes:</h1>
-        <FontAwesomeIcon icon={faFacebookF} />
-        <FontAwesomeIcon icon={faInstagram} />
-        <FontAwesomeIcon icon={faLinkedinIn} />
-        <FontAwesomeIcon icon={faWhatsapp} />
+        <a><FontAwesomeIcon icon={faFacebookF} /></a>
+        <a><FontAwesomeIcon icon={faInstagram} /></a>
+        <a><FontAwesomeIcon icon={faLinkedinIn} /></a>
+        <a><FontAwesomeIcon icon={faWhatsapp} /></a>
       </div>
       <img src="../automatizacionP.jpg" alt=""/>
     </div>
