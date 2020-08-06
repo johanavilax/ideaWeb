@@ -13,7 +13,7 @@ import gsap , { TimelineMax, TweenMax, TweenLite,Back } from "gsap";
 
 import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
 
-import Carousel, {slidesToShowPlugin  } from '@brainhubeu/react-carousel';
+import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
