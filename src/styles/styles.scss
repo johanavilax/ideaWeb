@@ -824,15 +824,6 @@ body {
         .atras {
             z-index: 7;
         }
-        #transicionAzul{
-            height: 100vh;
-            width: (100vw/3);
-            position: absolute;
-            left:0;
-            top:0;
-            background-color: $black;
-            z-index: 8;
-        }
         .servicio{
             height: 100vh;
             width: (100vw/3);
@@ -895,21 +886,17 @@ body {
     display: flex;
     .imagen{
         height: 100vh;
-        width: 50vw;
+        width: 100vw;
         object-fit: cover;
         overflow: hidden;
         img{
             height: 100vh;
-            width: 50vw;
+            width: 100vw;
             object-fit: cover;
             transform: scale(1.2);
         }
     }
-    .derecha{
-        height: 100vh;
-        width: 50vw;
-        background-color: $black;
-    }
+
     h1{
         z-index: 25;
         position: absolute;
@@ -918,6 +905,16 @@ body {
         color:#fff;
         padding-left: 2vw;
         font-size: 4vw;
+    }
+    .arrow{
+        cursor: pointer;
+        position: absolute;
+        left: 50%;
+        top: 90%;
+        margin: 0 auto;
+        width: 50px;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
     }
 }
 

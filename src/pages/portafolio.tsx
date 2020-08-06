@@ -45,17 +45,15 @@ const Portafolio = () => {
       }
     }
     const vw = window.innerWidth;
-    const tl = new TimelineMax().to("#"+toPage+"Servicios",1,{width:"50vw"},"anim")
+    const tl = new TimelineMax().to("#"+toPage+"Servicios",1,{width:"100vw"},"anim")
                                 .to("#"+toPage+"Servicios h1",{fontSize:"4vw",top:"75%"},"anim")
-                                .to("#porfolioAnim",1,{left:-vw/3*pos},"anim")
-                                .to("#transicionAzul",1,{left:vw/2+vw/3*pos,width:"50vw"},"anim").play();
+                                .to("#porfolioAnim",1,{left:-vw/3*pos},"anim").play();
 
   }
   return (
     <>
       <div id="portafolio">
         <div id="porfolioAnim" className="servicios">
-          <div id="transicionAzul"/>
           <TransitionLink id="automatizacionServicios" className="servicio adelante" to="/servicios/automatizacion" 
             exit={{trigger:()=>exitAnim("automatizacion",0),length:2}} 
             entry={{delay: 2,trigger:()=>animationClose("automatizacion")}}
