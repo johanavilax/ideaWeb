@@ -59,9 +59,11 @@ const Header = (props) => {
               logo.style.opacity = ("0")
             }
           
-              if(positionTop > 1.9*vh && positionTop <6*vh){
-                setactualLogo("../ideaBlanco.png")
-              }else if(positionTop < 1.9*vh || positionTop >6*vh){
+              if(positionTop > 1.9*vh && positionTop <5.65*vh){
+                // setactualLogo("../ideaBlanco.png")
+                logo.style.opacity = ("0")
+              }else if(positionTop < 1.9*vh || positionTop >5.65*vh){
+                logo.style.opacity = ("1")
                 setactualLogo("../idea.png")
               }
             }else if(window.location.pathname === "/portafolio/"){

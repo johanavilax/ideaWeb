@@ -13,18 +13,16 @@ import gsap , { TimelineMax, TweenMax, TweenLite,Back } from "gsap";
 
 import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
 
-import bombillo1 from '../images/bombillos/bombillo1.svg'
-import bombillo2 from '../images/bombillos/bombillo2.svg'
-import bombillo3 from '../images/bombillos/bombillo3.svg'
-import bombillo4 from '../images/bombillos/bombillo4.svg'
-import bombillo5 from '../images/bombillos/bombillo5.svg'
+import Carousel, {slidesToShowPlugin  } from '@brainhubeu/react-carousel';
+import '@brainhubeu/react-carousel/lib/style.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
+import { faLongArrowAltRight ,faChevronLeft,faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import TransitionLink from 'gatsby-plugin-transition-link'
+import {TransitionContext} from '../context/transitionContext';
 gsap.registerPlugin(CSSPlugin)
 //context transition
-import {TransitionContext} from '../context/transitionContext';
+
 const Quienes= (props)=>{
 
   const {animated, setanimated,finish,setfinish,to,setto} = useContext(TransitionContext)
@@ -68,14 +66,6 @@ const Quienes= (props)=>{
   }
   `)
 
-  const [actualBombillo,setactualBombillo]=useState(bombillo1)
-    //Ref
-    const preloaderRef = React.createRef<HTMLDivElement>()
-    useEffect(()=>{
-      // console.log(actualBombillo)
-
-    },[actualBombillo])
-
     useEffect(()=>{
       const vh = window.innerHeight;
       var controller = new ScrollMagic.Controller();
@@ -84,16 +74,7 @@ const Quienes= (props)=>{
       .addTo(controller);
     },[])
 
-    const circles = ()=>{
-      var tamano = "1020"
-      return (
-      <>
-        <svg xmlns="http://www.w3.org/2000/svg" width={tamano} height="20" viewBox={`0 0 ${tamano} 20`}>
-          <line id="Línea_1" data-name="Línea 1" x2={tamano} transform="translate(10 10)" fill="none" stroke="#011c27" stroke-linecap="round" stroke-width="20" stroke-dasharray="0 30"/>
-        </svg>
-      </>
-      )
-    }
+
     const animationClose = ()=>{
         const t2 = new TimelineMax({
           onComplete:()=>{
@@ -116,22 +97,6 @@ const Quienes= (props)=>{
         setfinish(false)
       }
     },[animated,finish])
-const circle= ()=>{
-  return(
-    <>
-      <div className="circle">
-        <svg >
-        <circle cx="177" cy="177" r="177" />
-        </svg>
-          <h1>Proyecto</h1>
-          <p>
-            Loremipsumdolorsitamet,consectetuer
-            adipiscingelit.Aeneancommodoligulaegetdolor.
-          </p>
-      </div>
-    </>
-  )
-}
 
     return(
       <>
@@ -216,14 +181,17 @@ const circle= ()=>{
               <div className="confian">
               <h1>Ellos confian en nosotros</h1>
                     <div className="arriba">
-                      <img className="imagenes" src="../company.svg" alt=""/>
-                      <img className="imagenes" src="../company.svg" alt=""/>
-                      <img className="imagenes" src="../company.svg" alt=""/>
+                      <img className="imagenes" src="../clientes/Cliente1.svg" alt=""/>
+                      <img className="imagenes" src="../clientes/Cliente2.svg" alt=""/>
+                      <img className="imagenes" src="../clientes/Cliente3.svg" alt=""/>
                     </div>
                     <div className="abajo">
-                      <img className="imagenes" src="../company.svg" alt=""/>
-                      <img className="imagenes" src="../company.svg" alt=""/>
-                      <img className="imagenes" src="../company.svg" alt=""/>
+                      <img className="imagenes" src="../clientes/Cliente4.svg" alt=""/>
+                      <img className="imagenes" src="../clientes/Cliente5.svg" alt=""/>
+                      <img className="imagenes" src="../clientes/Cliente6.svg" alt=""/>
+                    </div>
+                    <div className="ultimo">
+                      <img className="imagenes" src="../clientes/Cliente7.svg" alt=""/>
                     </div>
               </div>
 
@@ -251,6 +219,24 @@ const circle= ()=>{
                 </TransitionLink>
                 </div>
               </div>
+          </div>
+          <div id="aliadosHome">
+            <h1>Nuestros aliados</h1>
+
+              <Carousel slidesPerPage={3} infinite={true} arrows={true} autoPlay={1500} draggable={true}
+                arrowLeft={<FontAwesomeIcon style={{paddingLeft:8,color:"#273e48",cursor: "pointer"}} icon={faChevronLeft} />}
+                arrowRight={<FontAwesomeIcon style={{paddingRight:8,color:"#273e48",cursor: "pointer"}} icon={faChevronRight} />}
+                addArrowClickHandler={true}
+              >
+                <img src="../aliados/AIM1.svg" />
+                <img src="../aliados/AIM2.svg" />
+                <img src="../aliados/AIM3.svg" />
+                <img src="../aliados/AIM4.svg" />
+                <img src="../aliados/AIM5.svg" />
+                <img src="../aliados/AIM6.svg" />
+              </Carousel>
+
+
           </div>
           <div id="serviciosHome">
             <h1>Somos expertos en estas áreas de ingeníeria</h1>

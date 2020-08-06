@@ -27,7 +27,7 @@ const Footer = (props) => {
             <footer>
                 <div id="footer">
                     <div className="decoracion" />
-                    <TransitionLink className="flecha" to="/proyectos" onClick={()=>setto("Contacto")}
+                    <TransitionLink className="flecha" to="/contacto" onClick={()=>setto("Contacto")}
                         exit={{trigger:()=>exitAnim()}} entry={{trigger: () => animationClose()}}>
                         <p>Contactanos</p>
                         <FontAwesomeIcon icon={faLongArrowAltRight} />

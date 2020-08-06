@@ -35,34 +35,52 @@ const Portafolio = () => {
 
     const tl = new TimelineMax().to("#"+toPage+"Page black",{width:"100vw"}).play();
   }
-  const exitAnim = (toPage:String)=>{
-    const tl = new TimelineMax().to("#"+toPage+"Servicios",1,{width:"100vw"},"anim")
-                                .to("#"+toPage+"Servicios h1",{fontSize:"7vw"},"anim").play();
+  const exitAnim = (toPage:String,pos:number)=>{
+    console.log("exit")
+    const serviciosF = document.getElementsByClassName("servicio")
+    for (let k = 0; k < serviciosF.length; k++) {
+      if(serviciosF[k].id!==toPage+"Servicios"){
+        serviciosF[k].classList.remove("adelante");
+        serviciosF[k].classList.add("atras");
+      }
+    }
+    const vw = window.innerWidth;
+    const tl = new TimelineMax().to("#"+toPage+"Servicios",1,{width:"50vw"},"anim")
+                                .to("#"+toPage+"Servicios h1",{fontSize:"4vw",top:"75%"},"anim")
+                                .to("#porfolioAnim",1,{left:-vw/3*pos},"anim")
+                                .to("#transicionAzul",1,{left:vw/2+vw/3*pos,width:"50vw"},"anim").play();
 
   }
   return (
     <>
       <div id="portafolio">
         <div id="porfolioAnim" className="servicios">
-          <TransitionLink id="automatizacionServicios" className="servicio" to="/servicios/automatizacion" 
-            exit={{trigger:()=>exitAnim("automatizacion"),length:2}} 
+          <div id="transicionAzul"/>
+          <TransitionLink id="automatizacionServicios" className="servicio adelante" to="/servicios/automatizacion" 
+            exit={{trigger:()=>exitAnim("automatizacion",0),length:2}} 
             entry={{delay: 2,trigger:()=>animationClose("automatizacion")}}
             >
             <div className="black" />
             <img src="../automatizacionP.jpg" />
             <h1 className="titulo">Automatizacíon industrial</h1>
           </TransitionLink>
-          <div className="servicio" onClick={()=>exitAnim("automatizacion")} >
+          <TransitionLink id="energiaServicios" className="servicio adelante" to="/servicios/energia" 
+                      exit={{trigger:()=>exitAnim("energia",1),length:2}} 
+                      entry={{delay: 2,trigger:()=>animationClose("energia")}}
+                      >
             <div className="black" />
             <img src="../energiaP.jpg" />
             <h1 className="titulo">Energias renovables</h1>
-          </div>
-          <div className="servicio">
+          </TransitionLink>
+          <TransitionLink id="industrialServicios" className="servicio adelante" to="/servicios/industrial" 
+                      exit={{trigger:()=>exitAnim("industrial",2),length:2}} 
+                      entry={{delay: 2,trigger:()=>animationClose("industrial")}}
+                      >
             <div className="black" />
             <img src="../industrialP.jpg" />
             <h1 className="titulo">Diseño industrial</h1>
-          </div>
-          <div className="servicio">
+          </TransitionLink>
+          <div id="ergonomiaServicios" className="servicio adelante" onClick={()=>exitAnim("ergonomia",3)}>
             <div className="black" />
             <img src="../ergonomiaP.jpg" />
             <h1 className="titulo">Elevacion ergonomia</h1>

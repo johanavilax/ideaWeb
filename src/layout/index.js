@@ -1,7 +1,4 @@
-import React , {useState,useEffect,createRef} from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-
+import React , {useState} from "react"
 import Header from "../components/header"
 
 import "../styles/styles.scss"
@@ -15,13 +12,6 @@ export default  (props) => {
   const [animated, setanimated] = useState(false)
   const [finish,setfinish]  = useState(false)
   const [to,setto] = useState("test")
-  const [footer,setfooter] = useState(true)
-
-  useEffect(()=>{
-
-    
-  },[])
-
   return (
     <>
       <div  className="layout-inner"> 
@@ -30,9 +20,7 @@ export default  (props) => {
           <div >
             <main>{children}</main>
           </div>
-
       </TransitionContext.Provider>
-
       </div>
 
     </>

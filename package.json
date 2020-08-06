@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "IDEA SAS",
   "private": true,
   "description": "A simple starter to get up and developing quickly with Gatsby",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "AIDEA SAS",
   "dependencies": {
     "@ap.cx/react-fullpage": "^0.2.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
@@ -34,6 +34,7 @@
     "scrollmagic-plugin-gsap": "^1.0.4"
   },
   "devDependencies": {
+    "@types/brainhubeu__react-carousel": "^1.15.0",
     "prettier": "2.0.5"
   },
   "keywords": [
