@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[15],{pyOe:function(e,a,t){"use strict";t.r(a);var n=t("q1tI"),i=t.n(n);a.default=function(e){return i.a.createElement(i.a.Fragment,null,i.a.createElement("div",{className:"serviciosContainer",id:"indutrialPage"},i.a.createElement("img",{src:"../industrialP.jpg"}),i.a.createElement("h1",{className:"titulo"},"Automatizacíon industrial"),i.a.createElement("div",{className:"derecha"})),i.a.createElement("div",null))}}}]);
+//# sourceMappingURL=component---src-pages-servicios-industrial-tsx-2141962169ca663948d5.js.map
