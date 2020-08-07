@@ -882,7 +882,7 @@ body {
 //servicios 
 
 .serviciosContainer{
-    height: 100vh;
+    height: auto;
     display: flex;
     .imagen{
         height: 100vh;
@@ -900,7 +900,7 @@ body {
     h1{
         z-index: 25;
         position: absolute;
-        top:75%;
+        top:75vh;
         left:0%;
         color:#fff;
         padding-left: 2vw;
@@ -910,56 +910,131 @@ body {
         cursor: pointer;
         position: absolute;
         left: 50%;
-        top: 90%;
+        top: 90vh;
         margin: 0 auto;
         width: 50px;
         transform: translate(-50%, -50%);
         -webkit-transform: translate(-50%, -50%);
     }
+
 }
 
+.description{
+    height: 105vh;
+    width: 100vw;
+    display: flex;
+    .izq{
+        height: 100vh;
+        width: 30vw;
+        background-color: $black;
+    }
+    .der{
+        height: 100vh;
+        width: 70vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        p{
+            font-size: 2vw;
+            width: 50vw;
+            margin-left: 20%;
+        }
+    }
+    img{
+        width: 30vw;
+        height: 70vh;
+        position: absolute;
+        top:150vh;
+        left:25vw;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        object-fit: cover;
+        border-radius: 3vw;
+        -webkit-box-shadow: -1px 10px 16px 0px rgba(1,28,39,0.19);
+        -moz-box-shadow: -1px 10px 16px 0px rgba(1,28,39,0.19);
+        box-shadow: -1px 10px 16px 0px rgba(1,28,39,0.19);
+    }
+}
+#proyectoArriba{
+    text-align: left;
+    color: $black;
+    font-size: 3vw;
+    height: auto;
+    padding-left: 10vw;
+    height: 30vh;
+}
+.filters{
+    cursor: pointer;
+    display: flex;
+    // flex-direction: column;
+    font-size: 2vw;
+    width: 100vw;
+    height: 30vh;
+    align-items: center;
+    justify-content: center;
+    h4{
+        width: 13vw;
+    }
+}
 #proyecto{
     display: flex;
-    flex-direction: row;
     height: auto;
     .project{
-        width: 50vw;
+        width: 90%;
+        border: red solid 2px;
         height: auto;
         z-index: 10;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
         .projects{
+            flex: 33%;
             overflow: hidden;
-            height: (100vh/3);
+            height: 20vw;
+            width: 20vw;
             box-sizing: border-box;
-            border: black 2px solid;
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             cursor:pointer;
             -moz-transition-duration: 1s;
             -o-transition-duration: 1s;
             -webkit-transition-duration: 1s;
             transition-duration: 1s;
             .black{
-                height: (100vh/3);
-                width: 50vw;
-                top:0;
-                left:0;
+                max-width: (90vw/3);
+                height:98%;
+                width: 98%;
+                top:50%;
+                left:50%;
                 z-index: 20;
                 position: absolute;
                 background-color: rgba(0, 0, 0, 0.3);
+                transform: translate(-50%, -50%);
+                -webkit-transform: translate(-50%, -50%);
             }
             h1{
                     z-index: 25;
                     position: absolute;
-                    top:65%;
-                    left:0%;
+                    top:50%;
+                    left:50%;
                     color:#fff;
                     padding-left: 2vw;
                     font-size: 3vw;
+                    transform: translate(-50%, -50%);
+                    -webkit-transform: translate(-50%, -50%);
             }
             img{
+                max-width: (90vw/3);
+                width: 98%;
+                height:98%;
+                object-fit: cover;
                 -moz-transition-duration: 0.5s;
                 -o-transition-duration: 0.5s;
                 -webkit-transition-duration: 0.5s;
                 transition-duration: 0.5s;
+                margin:auto;
             }
         }
         .projects:hover{
