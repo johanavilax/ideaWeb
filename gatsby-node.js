@@ -56,3 +56,49 @@ exports.onCreateWebpackConfig = ({
     },
   })
 }
+
+const makeRequest = (graphql, request) => new Promise((resolve, reject) => {
+  // Query for nodes to use in creating pages.
+  resolve(
+    graphql(request).then(result => {
+      if (result.errors) {
+        reject(result.errors)
+      }
+      
+      return result;
+    })
+  )
+});
+exports.createPages = ({ actions, graphql }) => {
+  const { createPage } = actions;
+  
+  const getArticles = makeRequest(graphql, `
+      {
+        allStrapiProyectos {
+          edges {
+            node {
+              id
+              title
+            }
+          }
+        }
+      }
+    `).then(result => {
+    // Create pages for each article.
+    result.data.allStrapiProyectos.edges.forEach(({ node }) => {
+      node.title = node.title.replace(" ","-")
+      console.log(node.title)
+      console.log(node.id)
+      createPage({
+        path: `/${node.id}/${node.title}`,
+        component: Path.resolve(`src/templates/proyectosPost.tsx`),
+        context: {
+          id: node.id,
+        },
+      })
+    })
+  });
+  
+  // Query for articles nodes to use in creating pages.
+  return getArticles;
+};

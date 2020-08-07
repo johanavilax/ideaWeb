@@ -35,10 +35,17 @@ module.exports = {
         layout: require.resolve(`./src/layout`),
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
-    
+    {
+      resolve: "gatsby-source-strapi",
+      options: {
+        apiURL: "https://lit-peak-56471.herokuapp.com",
+        contentTypes: [
+          "proyectos",
+          "categories",
+        ],
+        queryLimit: 1000,
+      },
+    },
   ],
   pathPrefix : "/ideaWeb",
   
